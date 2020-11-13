@@ -1,2 +1,2 @@
 # KidsLand
-A POO project for your pleasur
+A POO project for your pleasure
