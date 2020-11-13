@@ -1,11 +1,9 @@
 package Controller;
 
-import Controller.Customers;
-
-public class Guest extends Customers {
+public class Guest extends Person {
 
 public Guest(){
-    super(null,null,-1);
+    super(null,null,null,null);
 }
 
 }

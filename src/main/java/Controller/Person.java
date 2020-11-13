@@ -4,13 +4,23 @@ package Controller;
 public abstract class Person {
     protected String firstName;
     protected String name;
-    protected float age;
+    protected java.sql.Date age;
+    protected int age_int;
 
-
-    public Person(String name, String firstName, float age){
+    protected String email;
+    public Person(String name, String firstName, java.sql.Date age,String email){
         this.name = name;
         this.firstName = firstName;
         this.age = age;
+        this.email = email;
+    }
+//------------------------------SET------------------------------------------------------------------------
+    public String getEmail() {
+        return email;
     }
 
+    public String getName() {
+        return name;
+    }
+//----------------------------------------------------------------------------------------------------------
 }

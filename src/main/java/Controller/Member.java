@@ -1,11 +1,11 @@
 package Controller;
 
-import Controller.Customers;
-
-public class Member extends Customers {
-
-    public Member(String name, String firstName, float age)
+public class Member extends Person {
+    private String email;
+    public Member(String name, String firstName, java.sql.Date age, String email)
     {
-        super(name, firstName, age);
+        super(name, firstName, age,email);
     }
+
+    //Ici methode user
 }
