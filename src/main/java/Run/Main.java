@@ -14,26 +14,30 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String pswd = "root";
+        final String passwd = "root";
         final String user = "v4resk";
         try {
-            Connection conn = DriverManager.getConnection(url,user,pswd);
+            Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
 
             //------------TEST---------------------------------
             long millis=System.currentTimeMillis();
             java.sql.Date date=new java.sql.Date(millis);
-            ArrayList<Person> listRide= msql.getPersonList();
-            if(controller.db_addMember("Jean","Dupont",date,"john22.macdo1@hotmail.com","Azerty"))
-                System.out.println("Succes Add");
-            else
-                System.out.println("email is not unic");
+            ArrayList<Ride> listRide= msql.getRideList();
+            ArrayList<Person> listPerson = msql.getPersonList();
 
+            controller.db_addRide("LocaFola",120,11);
             for (int i = 0; i < listRide.size(); i++) {
-                System.out.println(listRide.get(i).getEmail());
                 System.out.println(listRide.get(i).getName());
+
             }
+            controller.db_DeleteRide("LocaFola");
+            for (int i = 0; i < listRide.size(); i++) {
+                System.out.println(listRide.get(i).getName());
+
+            }
+
             //-------------END OF TEST----------------------------
         }
         catch(SQLException ex) {

@@ -3,17 +3,15 @@ package Controller;
 public class Ride {
     private String name;
     private int nbrPlace;
-    private int nbrPlaceUsed;
-    private float price;
+    private double price;
 
-    public Ride(String name, int nbrPlace,int nbrPlaceUsed, float price){
+    public Ride(String name, int nbrPlace, double price){
         this.name = name;
         this.nbrPlace = nbrPlace;
-        this.nbrPlaceUsed = nbrPlaceUsed;
         this.price = price;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -25,9 +23,6 @@ public class Ride {
         return name;
     }
 
-    public int getNbrPlaceUsed() {
-        return nbrPlaceUsed;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -37,9 +32,6 @@ public class Ride {
         this.nbrPlace = nbrPlace;
     }
 
-    public void setNbrPlaceUsed(int nbrPlaceUsed) {
-        this.nbrPlaceUsed = nbrPlaceUsed;
-    }
 
     public void setPrice(float price) {
         this.price = price;
