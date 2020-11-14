@@ -24,6 +24,7 @@ public class Main {
             Controller controller = new Controller(msql);
 
             //------------TEST---------------------------------
+            // NEED TO FIX DATE BUG
             long millis=System.currentTimeMillis();
             java.sql.Date date=new java.sql.Date(millis);
             ArrayList<Ride> listRide= msql.getRideList();
@@ -31,14 +32,15 @@ public class Main {
             HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
 
 
-            for (int i = 0; i < listRide.size(); i++) {
-                System.out.println(listRide.get(i).getName());
 
-            }
             System.out.println("------------------------------");
-            controller.db_addRide("TowerOfLove",120,7.2);
-            if(controller.db_addAgenda("TowerOfLove",date))
-                System.out.println("CA MARCHE");
+            if(controller.db_addRide("TowerOfLove",120,7.2))
+                System.out.println("CA MARCHE0");
+            if(controller.db_addAgenda("TowerOfLove",date,7.2))
+                System.out.println("CA MARCHE1");
+
+            if(controller.db_UpdateRidePrice("TowerOfLove",date,20))
+                System.out.println("CA MARCHE2");
 
             for (int i = 0; i < listRide.size(); i++) {
                 System.out.println(listRide.get(i).getName());

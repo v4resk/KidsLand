@@ -2,7 +2,10 @@ package Controller;
 
 //IMPORT
 import Model.ModelSQL;
+
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Controller {
 
@@ -62,6 +65,9 @@ public class Controller {
 
     public boolean db_DeleteAgenda(String name, java.sql.Date date){
         ArrayList<RideAgenda> a = mSql.getAgenda().get(date);
+        if(a==null)
+            return false;
+
         //if we find at less one name equale we can delet
         for (int i = 0; i < a.size(); i++) {
             if (name.equals(a.get(i))) {
@@ -71,20 +77,35 @@ public class Controller {
         }
         return false;
     }
+//BLINDER ADD AGENDA
+    public boolean db_addAgenda(String name,java.sql.Date date,double price){
+        HashMap<java.sql.Date, ArrayList<RideAgenda>> agenda = mSql.getAgenda();
 
-    public boolean db_addAgenda(String name,java.sql.Date date){
-        ArrayList<Ride> rideList= mSql.getRideList();
-        //if the attraction exist
-        for (int i = 0; i < rideList.size() ; i++) {
-            if (name.equals(rideList.get(i).getName())){
-                mSql.db_addAgenda(name, date);
-                return true;
-            }
+        if(mSql.checkIfRideAgendaExist(name,date)){
+            return false;
         }
-        return false;
+
+        mSql.db_addAgenda(name, date, price);
+        return true;
+
     }
 
-   // public boolean db_UpdateRidePrice(String nom,double price)
+     public boolean db_UpdateRidePrice(String name,java.sql.Date date,double price){
+         ArrayList<Ride> rideList= mSql.getRideList();
+
+         if(mSql.getAgenda().get(date)==null)
+             return false;
+
+         for (int i = 0; i < rideList.size() ; i++) {
+             if (name.equals(rideList.get(i).getName())) {
+                 mSql.db_UpdateRidePrice(name, date, price);
+                 return true;
+             }
+         }
+         return false;
+     }
+
+
     //---------------------------------------------------------------------------------------------------------
 
 }

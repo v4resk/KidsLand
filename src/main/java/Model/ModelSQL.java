@@ -54,7 +54,7 @@ public class ModelSQL {
                 {
                     if(res.getString(1).equals(rideList.get(i).getName()))
                         // we add an RideAgenda
-                        agenda.get(res.getDate(2)).add(new RideAgenda(rideList.get(i),res.getInt(3)));
+                        agenda.get(res.getDate(2)).add(new RideAgenda(rideList.get(i),res.getInt(3),res.getDouble(4)));
                 }
             }
 
@@ -179,23 +179,25 @@ public class ModelSQL {
     }
 
     //ADD BOOKING TO AGENDA
-    public void db_addAgenda(String name,java.sql.Date date){
+    public void db_addAgenda(String name,java.sql.Date date,double price){
         agenda.putIfAbsent(date,new ArrayList<RideAgenda>());
         for (int i=0; i<rideList.size(); i++){
             //find the corresponding Ride to put in RideAgenda
             if(rideList.get(i).getName().equals(name)) {
-                agenda.get(date).add(new RideAgenda(rideList.get(i), 0));
+                agenda.get(date).add(new RideAgenda(rideList.get(i), 0,price));
                 break;
             }
         }
-        String query = "INSERT INTO Time (name,date_m,placeNbrUsed) VALUES"+
+        String query = "INSERT INTO Time (name,date_m,placeNbrUsed,price) VALUES"+
                         "("
                          + "'"+ name +"'"+","
                          +"'"+ date +"'"+","
-                         +"'"+0+"'"
+                         +"'"+0+"'"+","
+                         +"'"+price+"'"
                          +   ")";
         try {
             stmt.executeUpdate(query);
+
         }catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
             System.out.println("SQLState: " + e.getSQLState());
@@ -215,9 +217,46 @@ public class ModelSQL {
                         "name = "+"'"+name+"'"
                         +" AND m_date = "+"'"+date+"'";
     }
+
+    public void db_UpdateRidePrice(String name,java.sql.Date date,double price){
+        ArrayList<RideAgenda> a = agenda.get(date);
+        for (int i=0; i<a.size();i++){
+            if(name.equals(a.get(i).getRide().getName()))
+                a.get(i).setPrice(price);
+        }
+        String query = "UPDATE Time SET price="+"'"+price+"'"+
+                        "WHERE name="+"'"+name+"'"
+                        +"AND date_m="+"'"+date+"'";
+        try {
+            stmt.executeUpdate(query);
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+
+        }
+    }
 //---------------------------------------------------------------------------------------------------------
 
+public boolean checkIfRideAgendaExist(String name,java.sql.Date date){
+     String query = "SELECT * FROM Time WHERE "
+                    +"name = "+"'"+name+"'"
+                    +" AND date_m = "+ "'" +date+ "'";
+     try {
+         ResultSet res = stmt.executeQuery(query);
+         if (res.next())
+             return true;
+         else
+             return false;
+     }
+     catch (SQLException e) {
+         System.out.println("SQLException: " + e.getMessage());
+         System.out.println("SQLState: " + e.getSQLState());
+         System.out.println("VendorError: " + e.getErrorCode());
 
+     }
+    return false;
+}
 
 
 }

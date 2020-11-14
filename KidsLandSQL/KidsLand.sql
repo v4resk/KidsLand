@@ -24,6 +24,7 @@ CREATE TABLE Time(
 	name VARCHAR(40) NOT NULL,
 	date_m DATETIME NOT NULL,
 	placeNbrUsed INT,
+	price DOUBLE,
 	PRIMARY KEY(name,date_m),
 	CONSTRAINT fk_name_RideName
 	FOREIGN KEY(name)
@@ -52,12 +53,12 @@ INSERT INTO Ride(name,placeNbr,price) VALUES
 ('CuteAnimals',30,10),
 ('EverythingIsSugar',130,5);
 
-INSERT INTO Time(name,date_m,placeNbrUsed) VALUES
-('TowerOfLove','2020-11-25',20),
-('TowerOfLove','2020-11-26',10),
-('Onceuponatime','2020-11-25',50),
-('CuteAnimals','2020-12-9',3),
-('BoatTrip','2020-12-12',10),
-('CandyWorld','2020-12-12',0);
+INSERT INTO Time(name,date_m,placeNbrUsed,price) VALUES
+('TowerOfLove','2020-11-25',20,8),
+('TowerOfLove','2020-11-26',10,8),
+('Onceuponatime','2020-11-25',50,7),
+('CuteAnimals','2020-12-9',3,10),
+('BoatTrip','2020-12-12',10,10),
+('CandyWorld','2020-12-12',0,7);
 
 
