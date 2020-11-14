@@ -30,16 +30,21 @@ public class Main {
             ArrayList<Person> listPerson = msql.getPersonList();
             HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
 
-            controller.db_addRide("LocaFola",120,11);
+
             for (int i = 0; i < listRide.size(); i++) {
                 System.out.println(listRide.get(i).getName());
 
             }
-            controller.db_DeleteRide("LocaFola");
+            System.out.println("------------------------------");
+            controller.db_addRide("TowerOfLove",120,7.2);
+            if(controller.db_addAgenda("TowerOfLove",date))
+                System.out.println("CA MARCHE");
+
             for (int i = 0; i < listRide.size(); i++) {
                 System.out.println(listRide.get(i).getName());
 
             }
+
 
             System.out.println(agenda.toString());
             //-------------END OF TEST----------------------------

@@ -147,11 +147,19 @@ public class ModelSQL {
         }
     }
 
+    //DELET A RIDE
     public void db_DeleteRide(String name){
         for(int i=0; i<rideList.size();i++){
             if(name.equals(rideList.get(i).getName())){
                 rideList.remove(i);
                 break;
+            }
+        }
+        //DELETE IN AGENDA
+        for (ArrayList<RideAgenda> a : agenda.values()){
+            for (int i = 0; i < a.size(); i++) {
+                if(a.get(i).getRide().getName().equals(name))
+                    a.remove(i);
             }
         }
         String query1 = "DELETE FROM Time " +
@@ -168,6 +176,44 @@ public class ModelSQL {
             System.out.println("VendorError: " + e.getErrorCode());
 
         }
+    }
+
+    //ADD BOOKING TO AGENDA
+    public void db_addAgenda(String name,java.sql.Date date){
+        agenda.putIfAbsent(date,new ArrayList<RideAgenda>());
+        for (int i=0; i<rideList.size(); i++){
+            //find the corresponding Ride to put in RideAgenda
+            if(rideList.get(i).getName().equals(name)) {
+                agenda.get(date).add(new RideAgenda(rideList.get(i), 0));
+                break;
+            }
+        }
+        String query = "INSERT INTO Time (name,date_m,placeNbrUsed) VALUES"+
+                        "("
+                         + "'"+ name +"'"+","
+                         +"'"+ date +"'"+","
+                         +"'"+0+"'"
+                         +   ")";
+        try {
+            stmt.executeUpdate(query);
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+
+        }
+
+    }
+
+    public void db_DeleteAgenda(String name, java.sql.Date date){
+        ArrayList<RideAgenda> a = agenda.get(date);
+        for (int i = 0; i < a.size(); i++) {
+            if (name.equals(a.get(i)))
+                a.remove(i);
+        }
+        String query = "DELET FROM Time WHERE "+
+                        "name = "+"'"+name+"'"
+                        +" AND m_date = "+"'"+date+"'";
     }
 //---------------------------------------------------------------------------------------------------------
 

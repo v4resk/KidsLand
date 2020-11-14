@@ -60,6 +60,30 @@ public class Controller {
         return false;
     }
 
+    public boolean db_DeleteAgenda(String name, java.sql.Date date){
+        ArrayList<RideAgenda> a = mSql.getAgenda().get(date);
+        //if we find at less one name equale we can delet
+        for (int i = 0; i < a.size(); i++) {
+            if (name.equals(a.get(i))) {
+                mSql.db_DeleteAgenda(name, date);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean db_addAgenda(String name,java.sql.Date date){
+        ArrayList<Ride> rideList= mSql.getRideList();
+        //if the attraction exist
+        for (int i = 0; i < rideList.size() ; i++) {
+            if (name.equals(rideList.get(i).getName())){
+                mSql.db_addAgenda(name, date);
+                return true;
+            }
+        }
+        return false;
+    }
+
    // public boolean db_UpdateRidePrice(String nom,double price)
     //---------------------------------------------------------------------------------------------------------
 
