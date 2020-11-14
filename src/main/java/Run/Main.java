@@ -4,11 +4,13 @@ import Controller.Controller;
 import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
+import Controller.RideAgenda;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,6 +28,7 @@ public class Main {
             java.sql.Date date=new java.sql.Date(millis);
             ArrayList<Ride> listRide= msql.getRideList();
             ArrayList<Person> listPerson = msql.getPersonList();
+            HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
 
             controller.db_addRide("LocaFola",120,11);
             for (int i = 0; i < listRide.size(); i++) {
@@ -38,6 +41,7 @@ public class Main {
 
             }
 
+            System.out.println(agenda.toString());
             //-------------END OF TEST----------------------------
         }
         catch(SQLException ex) {

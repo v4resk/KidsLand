@@ -7,8 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//A FAIR : Add Time in constructor; (new classes / Agenda)
-//         Add functionality to add and remove availability of Ride in Time table;
+//A FAIR : /
+//       :  Add functionality to add and remove availability of Ride in Time table;
 
 
 // The ModelSQL class manages data of our application.
@@ -47,7 +47,15 @@ public class ModelSQL {
             //CONSTRUCTION OF AGENDA
             res = stmt.executeQuery("SELECT * FROM Time");
             while (res.next()){
-                
+                //Initialise ArrayList and date Key
+                agenda.putIfAbsent(res.getDate(2), new ArrayList<RideAgenda>());
+                //Search for match with a Ride
+                for(int i=0; i<rideList.size();i++)
+                {
+                    if(res.getString(1).equals(rideList.get(i).getName()))
+                        // we add an RideAgenda
+                        agenda.get(res.getDate(2)).add(new RideAgenda(rideList.get(i),res.getInt(3)));
+                }
             }
 
         } catch (SQLException e) {
@@ -65,6 +73,11 @@ public class ModelSQL {
     public ArrayList<Ride> getRideList() {
         return rideList;
     }
+
+    public HashMap<Date, ArrayList<RideAgenda>> getAgenda() {
+        return agenda;
+    }
+
     //------------------------------------------------------------------------------------------------------
 
     //------------------------------EXECUTE QUERY/UPDATE---------------------------------------------------
