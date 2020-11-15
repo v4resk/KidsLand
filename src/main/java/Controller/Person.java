@@ -6,8 +6,8 @@ public abstract class Person {
     protected String name;
     protected java.sql.Date age;
     protected int age_int;
-
     protected String email;
+
     public Person(String name, String firstName, java.sql.Date age,String email){
         this.name = name;
         this.firstName = firstName;

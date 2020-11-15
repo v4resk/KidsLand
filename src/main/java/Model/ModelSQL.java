@@ -258,5 +258,41 @@ public boolean checkIfRideAgendaExist(String name,java.sql.Date date){
     return false;
 }
 
+public String getPasswdFor(String user){
+       String passwd = null;
+       String query = "SELECT mdp FROM Person WHERE email = " + "'"+user+"'";
+
+       try {
+           ResultSet res = stmt.executeQuery(query);
+           if(res.next()){
+               passwd = res.getString(1);
+           }
+       }catch (SQLException e) {
+           System.out.println("SQLException: " + e.getMessage());
+           System.out.println("SQLState: " + e.getSQLState());
+           System.out.println("VendorError: " + e.getErrorCode());
+
+       }
+
+       return passwd;
+}
+
+ public boolean isAnEmployee(String user){
+
+        String query = "SELECT employBool FROM Person WHERE email = " + "'"+user+"'";
+        Boolean isEmployee = false;
+
+        try {
+            ResultSet res = stmt.executeQuery(query);
+            if(res.next())
+                isEmployee = res.getBoolean(1);
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+
+        }
+        return isEmployee;
+ }
 
 }

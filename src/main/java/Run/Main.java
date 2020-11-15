@@ -1,5 +1,11 @@
 package Run;
 
+//** TO-DO LIST : Sign-in feature;
+//              : in person class :
+//                                  book a ride + save it in db
+//                                  discount
+
+
 import Controller.Controller;
 import Controller.Ride;
 import Model.ModelSQL;
@@ -7,6 +13,7 @@ import Controller.Person;
 import Controller.RideAgenda;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,27 +31,19 @@ public class Main {
             Controller controller = new Controller(msql);
 
             //------------TEST---------------------------------
-            // NEED TO FIX DATE BUG
+
             long millis=System.currentTimeMillis();
-            java.sql.Date date=new java.sql.Date(millis);
+            java.sql.Date date = Date.valueOf("2021-10-09");
             ArrayList<Ride> listRide= msql.getRideList();
             ArrayList<Person> listPerson = msql.getPersonList();
             HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
+            Boolean boolEmployee = false;
 
-
-
-            System.out.println("------------------------------");
-            if(controller.db_addRide("TowerOfLove",120,7.2))
-                System.out.println("CA MARCHE0");
-            if(controller.db_addAgenda("TowerOfLove",date,7.2))
-                System.out.println("CA MARCHE1");
-
-            if(controller.db_UpdateRidePrice("TowerOfLove",date,20))
-                System.out.println("CA MARCHE2");
-
-            for (int i = 0; i < listRide.size(); i++) {
-                System.out.println(listRide.get(i).getName());
-
+            //SignIn
+            if(controller.signIn_check("Thomas.shelby@free.fr","dontfwpk")){
+                System.out.println("Loged in");
+                if(controller.isAnEmployee("Thomas.shelby@free.fr"))
+                    System.out.println("As employee");
             }
 
 

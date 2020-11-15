@@ -107,5 +107,19 @@ public class Controller {
 
 
     //---------------------------------------------------------------------------------------------------------
+    //--------------------------------LOGIN-------------------------------------------------------------
+
+    public boolean signIn_check(String user,String passwd){
+
+        String pass = mSql.getPasswdFor(user);
+        if(pass==null)
+            return false;
+        else return passwd.equals(pass);
+
+    }
+
+    public boolean isAnEmployee(String user){
+        return mSql.isAnEmployee(user);
+    }
 
 }
