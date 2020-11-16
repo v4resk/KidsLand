@@ -7,7 +7,8 @@ public class Employee extends Person{
         super(name, firstName, age,email);
     }
 
-    //ici methode admin
-
-
+    @Override
+    public double calculateDiscount() {
+        return 0.80;
+    }
 }

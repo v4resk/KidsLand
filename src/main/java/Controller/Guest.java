@@ -6,4 +6,8 @@ public Guest(){
     super(null,null,null,null);
 }
 
+    @Override
+    public double calculateDiscount() {
+        return 1;
+    }
 }
