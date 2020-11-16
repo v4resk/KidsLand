@@ -32,6 +32,17 @@ CREATE TABLE Time(
 )
 ENGINE=INNODB;
 
+CREATE TABLE History(
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+customerEmail VARCHAR(40) NOT NULL,
+rideName VARCHAR(40) NOT NULL,
+dateOfRide DATETIME NOT NULL,
+numberOfTickets INT DEFAULT 1,
+price DOUBLE,
+CONSTRAINT fk_Person_History FOREIGN KEY(customerEmail) REFERENCES Person(email),
+CONSTRAINT fk_Ride_Histoty FOREIGN KEY(rideName) REFERENCES Ride(name)
+)ENGINE=INNODB;
+
 INSERT INTO Person(name,firstName,date_naissance,email,mdp,employBool) VALUES
 ('Jean', 'Dupont', '1961-02-26', 'jean.dupont23@gmail.com', 'DupJe89!',false),
 ('Lily', 'Morat', '2000-03-12', 'lily.morat@free.fr','jaimelavie1',false),

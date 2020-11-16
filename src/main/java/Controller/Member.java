@@ -7,5 +7,8 @@ public class Member extends Person {
         super(name, firstName, age,email);
     }
 
-    //Ici methode user
+    @Override
+    public double calculateDiscount() {
+        return 0.80;
+    }
 }

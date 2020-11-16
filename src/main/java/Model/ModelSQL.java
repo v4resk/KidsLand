@@ -213,9 +213,19 @@ public class ModelSQL {
             if (name.equals(a.get(i)))
                 a.remove(i);
         }
-        String query = "DELET FROM Time WHERE "+
+        String query = "DELETE FROM Time WHERE "+
                         "name = "+"'"+name+"'"
-                        +" AND m_date = "+"'"+date+"'";
+                        +" AND date_m = "+"'"+date+"'";
+
+        try {
+            stmt.executeUpdate(query);
+
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+
+        }
     }
 
     public void db_UpdateRidePrice(String name,java.sql.Date date,double price){
@@ -236,8 +246,50 @@ public class ModelSQL {
 
         }
     }
-//---------------------------------------------------------------------------------------------------------
 
+    public void bookARide(java.sql.Date date, String nameRide,String email ,double price, int nbrOfTicket){
+        String query = "INSERT INTO History (customerEmail,rideName,dateOfRide,numberOfTickets,price) VALUES"+
+                "("
+                + "'"+ email +"'"+","
+                +"'"+ nameRide +"'"+","
+                +"'"+date+"'"+","
+                +"'"+nbrOfTicket+"'"+","
+                +"'"+price+"'"
+                +   ")";
+
+        try {
+            stmt.executeUpdate(query);
+            db_updateNbrPlaceInBook(nameRide,date,nbrOfTicket);
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+        }
+    }
+
+    public void db_updateNbrPlaceInBook(String rideName,java.sql.Date date,int nbrOfTickets){
+
+        try {
+
+            String queryNbrOfTickets = "SELECT placeNbrUsed FROM Time "+
+                    "WHERE name="+"'"+rideName+"'"
+                    +"AND date_m="+"'"+date+"'";
+            ResultSet res = stmt.executeQuery(queryNbrOfTickets);
+            if(res.next())
+            nbrOfTickets+=res.getInt(1);
+
+            String query = "UPDATE Time SET placeNbrUsed="+"'"+nbrOfTickets+"'"+
+                    "WHERE name="+"'"+rideName+"'"
+                    +"AND date_m="+"'"+date+"'";
+            stmt.executeUpdate(query);
+        }catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+        }
+    }
+//---------------------------------------------------------------------------------------------------------
+//--------------------------------------CECK AND VERIF-----------------------------------------------------
 public boolean checkIfRideAgendaExist(String name,java.sql.Date date){
      String query = "SELECT * FROM Time WHERE "
                     +"name = "+"'"+name+"'"
@@ -294,5 +346,5 @@ public String getPasswdFor(String user){
         }
         return isEmployee;
  }
-
+//-----------------------------------------------------------------------------------------------------
 }

@@ -1,12 +1,13 @@
 package Run;
 
-//** TO-DO LIST : Sign-in feature;
+//** TO-DO LIST
 //              : in person class :
-//                                  book a ride + save it in db
+//
+//                                  remove places in agenda when book
 //                                  discount
 
 
-import Controller.Controller;
+import Controller.*;
 import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
@@ -33,11 +34,16 @@ public class Main {
             //------------TEST---------------------------------
 
             long millis=System.currentTimeMillis();
-            java.sql.Date date = Date.valueOf("2021-10-09");
+            java.sql.Date date = Date.valueOf("2020-11-25");
             ArrayList<Ride> listRide= msql.getRideList();
             ArrayList<Person> listPerson = msql.getPersonList();
             HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
             Boolean boolEmployee = false;
+
+            Employee mbr = new Employee("Thomas","Shelby",date,"Thomas.shelby@free.fr");
+            mbr.setController(controller);
+
+            controller.db_addAgenda("BoatTrip", Date.valueOf("2020-12-12"),12);
 
             //SignIn
             if(controller.signIn_check("Thomas.shelby@free.fr","dontfwpk")){
@@ -46,6 +52,10 @@ public class Main {
                     System.out.println("As employee");
             }
 
+            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10))
+                System.out.println("booked");
+
+            ;
 
             System.out.println(agenda.toString());
             //-------------END OF TEST----------------------------
