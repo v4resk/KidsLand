@@ -1,9 +1,12 @@
 package View;
 
-public class View {
+import javax.swing.*;
 
-	public View() {
-		// TODO Auto-generated constructor stub
-	}
+import java.awt.Color;
+import java.awt.event.*;
+
+public class View extends JFrame{
+
+
 
 }

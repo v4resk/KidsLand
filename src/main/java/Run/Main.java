@@ -5,6 +5,7 @@ import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
+import View.View;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,8 +17,10 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "root";
-        final String user = "v4resk";
+        final String passwd = "Alex08";
+        final String user = "alex";
+        View test = new View();
+        
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
