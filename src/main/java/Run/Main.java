@@ -26,6 +26,7 @@ public class Main {
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
         final String passwd = "root";
         final String user = "v4resk";
+        //new SignIn();
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
@@ -52,10 +53,6 @@ public class Main {
                     System.out.println("As employee");
             }
 
-            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10))
-                System.out.println("booked");
-
-            ;
 
             System.out.println(agenda.toString());
             //-------------END OF TEST----------------------------
