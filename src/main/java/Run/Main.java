@@ -12,7 +12,8 @@ import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
-import View.View;
+import View.Login;
+
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -27,7 +28,8 @@ public class Main {
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
         final String passwd = "root";
         final String user = "v4resk";
-        //new SignIn();
+        new Login();
+
 
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
