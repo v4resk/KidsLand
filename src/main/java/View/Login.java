@@ -20,12 +20,16 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
 
 	/**
 	 * Launch the application.
@@ -72,7 +76,7 @@ public class Login extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(224, 255, 255)));
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(175, 210, 350, 40);
+		panel_1.setBounds(175, 220, 350, 40);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -82,13 +86,53 @@ public class Login extends JFrame {
 		panel_1.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnNewButton = new JButton("LOG IN");
-		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color (0, 255, 0));
+		btnNewButton = new JButton("Login");
+		btnNewButton.setBackground(new Color (0, 0, 255));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
-		btnNewButton.setBounds(250, 270, 200, 35);
+		btnNewButton.setBounds(225, 275, 250, 35);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Username");
+		lblNewLabel.setBounds(175, 122, 150, 16);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Password");
+		lblNewLabel_1.setBounds(175, 200, 150, 16);
+		contentPane.add(lblNewLabel_1);
+		
+		btnNewButton_1 = new JButton("Not yet registered, register now");
+		btnNewButton_1.setFont(new Font("Monaco", Font.PLAIN, 12));
+		btnNewButton_1.setBounds(225, 325, 250, 35);
+		btnNewButton_1.addActionListener(new LoginListener());
+		contentPane.add(btnNewButton_1);
+		
+		btnNewButton_2 = new JButton("X");
+		btnNewButton_2.setBounds(660, 6, 34, 29);
+		btnNewButton_2.addActionListener(new LoginListener());
+		contentPane.add(btnNewButton_2);
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+	}
+	
+	private class LoginListener implements ActionListener{
+		
+		public void actionPerformed (ActionEvent e) {
+			Object button =e.getSource();
+			Object buttonClose = e.getSource();
+			
+			if(button == btnNewButton_1) {
+				GuestOrSignUp frame = new GuestOrSignUp();
+				frame.setVisible(true);
+			}
+			
+			if (buttonClose == btnNewButton_2) {
+				dispose();
+			}
+			
+			
+			
+		}
+		
+		
 	}
 }
