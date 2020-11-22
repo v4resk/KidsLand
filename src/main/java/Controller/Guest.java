@@ -8,6 +8,7 @@ public Guest(){
 
     @Override
     public double calculateDiscount() {
+        //no discount
         return 1;
     }
 }

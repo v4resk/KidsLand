@@ -9,6 +9,7 @@ public class Employee extends Person{
 
     @Override
     public double calculateDiscount() {
+        // Employee have 20% of reduction on any tickets
         return 0.80;
     }
 }

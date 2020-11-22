@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class Main {
@@ -52,10 +53,9 @@ public class Main {
                     System.out.println("As employee");
             }
 
-            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10))
-                System.out.println("booked");
+            //if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10))
+              //  System.out.println("booked");
 
-            ;
 
             System.out.println(agenda.toString());
             //-------------END OF TEST----------------------------
