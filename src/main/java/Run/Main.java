@@ -28,13 +28,12 @@ public class Main {
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
         final String passwd = "root";
         final String user = "v4resk";
-        new Login();
-
 
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
+            new Login(controller);
 
             //------------TEST---------------------------------
 
