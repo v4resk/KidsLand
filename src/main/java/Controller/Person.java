@@ -26,6 +26,7 @@ public abstract class Person {
     // Need to set a controller if you want to interact with DB/ BOOK tickets....
     public void setController(Controller controller){this.controller = controller; }
 //----------------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
     public boolean bookARide(java.sql.Date date, RideAgenda ride,int nbrOfTickets){
         if(controller==null)
             return false;
@@ -36,4 +37,7 @@ public abstract class Person {
 
     public abstract double calculateDiscount();
 
+=======
+    
+>>>>>>> d1b147cdf8711351b73367dafbf1b5a5db0aebab
 }

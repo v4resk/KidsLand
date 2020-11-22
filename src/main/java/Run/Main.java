@@ -12,6 +12,7 @@ import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
+import View.View;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -27,6 +28,7 @@ public class Main {
         final String passwd = "root";
         final String user = "v4resk";
         //new SignIn();
+
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
