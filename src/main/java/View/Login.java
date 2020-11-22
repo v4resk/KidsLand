@@ -1,16 +1,14 @@
 package View;
 
+import Controller.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-import javax.swing.UIManager;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
@@ -20,37 +18,19 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import javax.swing.JLabel;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private Controller controller;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login frame = new Login();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Login() {
+	public Login(Controller controller) {
+		this.controller = controller;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
@@ -80,16 +60,17 @@ public class Login extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setBorder(null);
 		textField_1.setBounds(0, 5, 350, 26);
 		panel_1.add(textField_1);
 		textField_1.setColumns(10);
 		
 		btnNewButton = new JButton("Login");
-		btnNewButton.setBackground(new Color (0, 0, 255));
+		btnNewButton.setBackground(new Color(131, 219, 255));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.setBounds(225, 275, 250, 35);
+		btnNewButton.addActionListener(new LoginCheckListener());
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Username");
@@ -102,6 +83,7 @@ public class Login extends JFrame {
 		
 		btnNewButton_1 = new JButton("Not yet registered, register now");
 		btnNewButton_1.setFont(new Font("Monaco", Font.PLAIN, 12));
+		btnNewButton_1.setBackground(new Color(131, 219, 255));
 		btnNewButton_1.setBounds(225, 325, 250, 35);
 		btnNewButton_1.addActionListener(new LoginListener());
 		contentPane.add(btnNewButton_1);
@@ -112,6 +94,8 @@ public class Login extends JFrame {
 		contentPane.add(btnNewButton_2);
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+
+		setVisible(true);
 	}
 	
 	private class LoginListener implements ActionListener{
@@ -132,7 +116,20 @@ public class Login extends JFrame {
 			
 			
 		}
-		
-		
+	}
+
+	private class LoginCheckListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+				if(controller.signIn_check(textField.getText(),String.valueOf(textField_1.getPassword()))) {
+				if (controller.isAnEmployee("Thomas.shelby@free.fr"))
+					System.out.println("Loged in as employee"); // Ouvrir feunetre employee
+				else
+					System.out.println("Loged in as Member"); // ICI Ouvrir la feunetre principale
+			}
+				else
+					JOptionPane.showMessageDialog(null,"LOGIN FAIL","ERROR",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

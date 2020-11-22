@@ -70,7 +70,7 @@ public class Controller {
 
         //if we find at less one name equale we can delet
         for (int i = 0; i < a.size(); i++) {
-            if (name.equals(a.get(i))) {
+            if (name.equals(a.get(i).getRide().getName())) {
                 mSql.db_DeleteAgenda(name, date);
                 return true;
             }
@@ -79,8 +79,6 @@ public class Controller {
     }
 //BLINDER ADD AGENDA
     public boolean db_addAgenda(String name,java.sql.Date date,double price){
-        HashMap<java.sql.Date, ArrayList<RideAgenda>> agenda = mSql.getAgenda();
-
         if(mSql.checkIfRideAgendaExist(name,date)){
             return false;
         }
@@ -105,7 +103,33 @@ public class Controller {
          return false;
      }
 
+     public boolean bookARide(java.sql.Date date, String nameRide,String email,double price,int nbrOfTickets){
+         if(!mSql.checkIfRideAgendaExist(nameRide,date)){
+             return false;
+         }
+         mSql.bookARide(date,nameRide,email,price,nbrOfTickets);
+         return true;
+     }
+
 
     //---------------------------------------------------------------------------------------------------------
+    //--------------------------------VERIFICATION FUNCTIONS-------------------------------------------------------------
 
+    public boolean signIn_check(String user,String passwd){
+
+        String pass = mSql.getPasswdFor(user);
+        if(pass==null)
+            return false;
+        else return passwd.equals(pass);
+
+    }
+
+    public boolean isAnEmployee(String user){
+        return mSql.isAnEmployee(user);
+    }
+
+    public boolean canIBook(int nbrOfTickets, Date date, RideAgenda ride) {
+        return (nbrOfTickets + ride.getPlaceNbrUsed()) <= ride.getRide().getNbrPlace();
+    }
+    //----------------------------------------------------------------------------------------
 }
