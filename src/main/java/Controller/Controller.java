@@ -103,11 +103,11 @@ public class Controller {
          return false;
      }
 
-     public boolean bookARide(java.sql.Date date, String nameRide,String email,double price,int nbrOfTickets){
+     public boolean bookARide(java.sql.Date date, String nameRide,String email,double price,int nbrOfTickets,String reduction){
          if(!mSql.checkIfRideAgendaExist(nameRide,date)){
              return false;
          }
-         mSql.bookARide(date,nameRide,email,price,nbrOfTickets);
+         mSql.bookARide(date,nameRide,email,price,nbrOfTickets,reduction);
          return true;
      }
 
