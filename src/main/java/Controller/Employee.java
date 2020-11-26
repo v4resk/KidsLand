@@ -1,14 +1,17 @@
 package Controller;
 
+import java.sql.Date;
+
 public class Employee extends Person{
 
-    String email;
     public Employee(String name, String firstName, java.sql.Date age,String email){
         super(name, firstName, age,email);
     }
 
-    @Override
-    public double calculateDiscount() {
-        return 0.80;
-    }
+    //Delet user
+    //Add a new Ride
+    //Add Ride on agenda
+    //Add discount on a ride in Agenda
+    //Delet a ride
+    //Delete a ride in agenda
 }
