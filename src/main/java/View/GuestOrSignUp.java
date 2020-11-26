@@ -4,14 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
 
 
 
@@ -21,23 +24,14 @@ public class GuestOrSignUp extends JFrame {
 	private JButton btnNewButton1;
 	private JButton btnNewButton;
 	private JButton btnNewButton_2;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel;
 	
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GuestOrSignUp frame = new GuestOrSignUp();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -73,6 +67,20 @@ public class GuestOrSignUp extends JFrame {
 		btnNewButton_2.setBounds(609, 6, 85, 29);
 		btnNewButton_2.addActionListener(new GuestOrSignUpListener());
 		contentPane.add(btnNewButton_2);
+		
+		lblNewLabel_2 = new JLabel("");
+		Image img2 = new ImageIcon(this.getClass().getResource("/Cloud1.png")).getImage();
+		lblNewLabel_2.setIcon(new ImageIcon(img2));
+		lblNewLabel_2.setBounds(235, 0, 465, 400);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel = new JLabel("");
+		Image img3 = new ImageIcon(this.getClass().getResource("/Cloud1.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(img3));
+		lblNewLabel.setBounds(0, 0, 357, 400);
+		contentPane.add(lblNewLabel);
+		
+
 		
 		setUndecorated(true);
 		setLocationRelativeTo(null);

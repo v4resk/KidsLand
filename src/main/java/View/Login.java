@@ -18,16 +18,22 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Image;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JPasswordField textField_1;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private Controller controller;
+	private JLabel lblNewLabel_3;
+	private JTextField textField_2;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
 
 	public Login(Controller controller) {
 		this.controller = controller;
@@ -40,58 +46,73 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(224, 255, 255)));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(175, 150, 350, 40);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBorder(null);
-		textField.setBounds(0, 6, 350, 28);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(224, 255, 255)));
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(175, 220, 350, 40);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
-		
-		textField_1 = new JPasswordField();
-		textField_1.setBorder(null);
-		textField_1.setBounds(0, 5, 350, 26);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-		
 		btnNewButton = new JButton("Login");
-		btnNewButton.setBackground(new Color(131, 219, 255));
+		btnNewButton.setBackground(new Color(150, 245, 255));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
-		btnNewButton.setBounds(225, 275, 250, 35);
+		btnNewButton.setBounds(80, 275, 250, 35);
 		btnNewButton.addActionListener(new LoginCheckListener());
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setBounds(175, 122, 150, 16);
+		lblNewLabel.setBounds(50, 130, 150, 16);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password");
-		lblNewLabel_1.setBounds(175, 200, 150, 16);
+		lblNewLabel_1.setBounds(50, 210, 150, 16);
 		contentPane.add(lblNewLabel_1);
 		
 		btnNewButton_1 = new JButton("Not yet registered, register now");
 		btnNewButton_1.setFont(new Font("Monaco", Font.PLAIN, 12));
-		btnNewButton_1.setBackground(new Color(131, 219, 255));
-		btnNewButton_1.setBounds(225, 325, 250, 35);
+		btnNewButton_1.setBackground(new Color(150, 245, 255));
+		btnNewButton_1.setBounds(80, 325, 250, 35);
 		btnNewButton_1.addActionListener(new LoginListener());
 		contentPane.add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("X");
-		btnNewButton_2.setBounds(660, 6, 34, 29);
+		btnNewButton_2.setBackground(new Color(224, 255, 255));
+		btnNewButton_2.setBounds(645, 2,50,50);
+		btnNewButton_2.setFocusPainted(false);
+		btnNewButton_2.setContentAreaFilled(false);
 		btnNewButton_2.addActionListener(new LoginListener());
 		contentPane.add(btnNewButton_2);
+		
+		textField_1 = new JPasswordField();
+		textField_1.setBounds(50, 230, 350, 25);
+		contentPane.add(textField_1);
+		textField_1.setBorder(null);
+		textField_1.setColumns(10);
+		
+		lblNewLabel_3 = new JLabel("");
+		Image img1 = new ImageIcon(this.getClass().getResource("/Passwrd.png")).getImage();
+		lblNewLabel_3.setIcon(new ImageIcon(img1));
+		lblNewLabel_3.setBounds(20, 228, 24, 24);
+		contentPane.add(lblNewLabel_3);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBorder(null);
+		textField_2.setBounds(50, 150, 350, 25);
+		contentPane.add(textField_2);
+		
+		lblNewLabel_2 = new JLabel("");
+		Image img = new ImageIcon(this.getClass().getResource("/image.jpg")).getImage();
+		lblNewLabel_2.setIcon(new ImageIcon(img));
+		lblNewLabel_2.setBounds(423, 63, 250, 297);
+		contentPane.add(lblNewLabel_2);
+		
+		lblNewLabel_5 = new JLabel("");
+		Image img2 = new ImageIcon(this.getClass().getResource("/Pers.png")).getImage();
+		lblNewLabel_5.setIcon(new ImageIcon(img2));
+		lblNewLabel_5.setBounds(20, 150, 24, 24);
+		contentPane.add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("");
+		Image img3 = new ImageIcon(this.getClass().getResource("/CloudLogin.png")).getImage();
+		lblNewLabel_6.setIcon(new ImageIcon(img3));
+		lblNewLabel_6.setBounds(-35, 2, 735, 398);
+		contentPane.add(lblNewLabel_6);
+		
+		
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 
@@ -120,9 +141,9 @@ public class Login extends JFrame {
 
 	private class LoginCheckListener implements ActionListener{
 
-		@Override
+		
 		public void actionPerformed(ActionEvent actionEvent) {
-				if(controller.signIn_check(textField.getText(),String.valueOf(textField_1.getPassword()))) {
+				if(controller.signIn_check(textField_2.getText(),String.valueOf(textField_1.getPassword()))) {
 				if (controller.isAnEmployee("Thomas.shelby@free.fr"))
 					System.out.println("Loged in as employee"); // Ouvrir feunetre employee
 				else

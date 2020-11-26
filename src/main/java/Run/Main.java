@@ -26,8 +26,9 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "root";
-        final String user = "v4resk";
+        final String passwd = "Alex08";
+        final String user = "alex";
+        
 
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);

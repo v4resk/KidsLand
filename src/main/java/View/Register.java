@@ -3,6 +3,9 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,28 +14,24 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class Register extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private JTextField textField1;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JButton btnNewButton_2;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Register frame = new Register();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -47,26 +46,98 @@ public class Register extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(224, 255, 255)));
-		panel.setBackground(Color.WHITE);
-		panel.setBounds(175, 150, 350, 40);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
 		textField = new JTextField();
 		textField.setBorder(null);
-		textField.setBounds(0, 6, 350, 28);
-		panel.add(textField);
+		textField.setBounds(175, 95, 350, 20);
 		textField.setColumns(10);
+		contentPane.add(textField);
 		
-		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setBounds(175, 122, 150, 16);
+		JLabel lblNewLabel1 = new JLabel("First Name");
+		
+		textField1 = new JTextField();
+		textField1.setBorder(null);
+		textField1.setBounds(175, 195, 350, 20);
+		textField1.setColumns(10);
+		contentPane.add(textField1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBorder(null);
+		textField_1.setBounds(175, 145, 350, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBorder(null);
+		textField_2.setBounds(175, 245, 350, 20);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBorder(null);
+		textField_3.setBounds(175, 295, 350, 20);
+		contentPane.add(textField_3);
+		
+		JLabel lblNewLabel = new JLabel("REGISTER");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(300, 35, 100, 20);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("REGISTER NOW");
+		btnNewButton.setBounds(250, 350, 200, 30);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_1 = new JLabel("Name");
+		lblNewLabel_1.setBounds(175, 75, 100, 20);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("First Name");
+		lblNewLabel_2.setBounds(175, 125, 100, 20);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1_1_1 = new JLabel("Date of Birth");
+		lblNewLabel_1_1_1.setBounds(175, 175, 100, 20);
+		contentPane.add(lblNewLabel_1_1_1);
+		
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Email Adress");
+		lblNewLabel_1_1_1_1.setBounds(175, 225, 100, 20);
+		contentPane.add(lblNewLabel_1_1_1_1);
+		
+		JLabel lblNewLabel_1_1_1_2 = new JLabel("Password");
+		lblNewLabel_1_1_1_2.setBounds(175, 277, 100, 20);
+		contentPane.add(lblNewLabel_1_1_1_2);
+		
+		btnNewButton_2 = new JButton("Return");
+		btnNewButton_2.setBounds(609, 6, 85, 29);
+		btnNewButton_2.addActionListener(new RegisterListener());
+		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		Image img = new ImageIcon(this.getClass().getResource("/CloudLogin.png")).getImage();
+		lblNewLabel_3.setIcon(new ImageIcon(img));
+		lblNewLabel_3.setBounds(0, 0, 711, 413);
+		contentPane.add(lblNewLabel_3);
+
 		
 		
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		
+	}
+	
+	
+private class RegisterListener implements ActionListener{
+		
+		public void actionPerformed (ActionEvent e) {
+			Object buttonClose = e.getSource();
+			
+			
+			if (buttonClose == btnNewButton_2) {
+				dispose();
+			}
+			
+			
+			
+		}
 	}
 }
