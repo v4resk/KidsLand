@@ -57,7 +57,7 @@ public class Main {
             }
 
 
-            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10,"Normal"))
+            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
                System.out.println("booked");
 
 
