@@ -25,15 +25,10 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-<<<<<<< HEAD
         final String passwd = "Alex08";
         final String user = "alex";
-=======
-        final String passwd = "root";
-        final String user = "v4resk";
-        
 
->>>>>>> 12f44b747bae41e82d56f9b991162ed84650ff50
+
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
@@ -62,8 +57,8 @@ public class Main {
             }
 
 
-            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10,"Normal"))
-               System.out.println("booked");
+           if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
+              System.out.println("booked");
 
 
 
