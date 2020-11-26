@@ -10,6 +10,8 @@ import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
+import View.Login;
+
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -25,10 +27,13 @@ public class Main {
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
         final String passwd = "root";
         final String user = "v4resk";
+        
+
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
+            new Login(controller);
 
             //------------TEST---------------------------------
 
@@ -51,8 +56,10 @@ public class Main {
                     System.out.println("As employee");
             }
 
+
             if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10,"Normal"))
                System.out.println("booked");
+
 
 
             System.out.println(agenda.toString());

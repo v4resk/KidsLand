@@ -321,6 +321,7 @@ public boolean checkIfRideAgendaExist(String name,java.sql.Date date){
     return false;
 }
 
+
 public String getPasswdFor(String user){
        String passwd = null;
        String query = "SELECT mdp FROM Person WHERE email = " + "'"+user+"'";
@@ -358,4 +359,8 @@ public String getPasswdFor(String user){
         return isEmployee;
  }
 //-----------------------------------------------------------------------------------------------------
+
 }
+
+
+
