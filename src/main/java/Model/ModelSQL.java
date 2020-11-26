@@ -271,10 +271,12 @@ public class ModelSQL {
         try {
             stmt.executeUpdate(query);
             db_updateNbrPlaceInBook(nameRide,date,nbrOfTicket);
+            
         }catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
             System.out.println("SQLState: " + e.getSQLState());
             System.out.println("VendorError: " + e.getErrorCode());
+            System.out.println("lllll");
         }
     }
 

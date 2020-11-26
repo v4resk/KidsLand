@@ -25,9 +25,9 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "root";
-        final String user = "v4resk";
-        
+        final String passwd = "Alex08";
+        final String user = "alex";
+
 
         try {
             Connection conn = DriverManager.getConnection(url,user,passwd);
@@ -55,10 +55,10 @@ public class Main {
                 if(controller.isAnEmployee("Thomas.shelby@free.fr"))
                     System.out.println("As employee");
             }
+            
+           if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
+              System.out.println("booked");
 
-
-            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
-               System.out.println("booked");
 
 
 
