@@ -27,7 +27,7 @@ public abstract class Person {
     public void setController(Controller controller){this.controller = controller; }
 //----------------------------------------------------------------------------------------------------------
 
-
+//ici paris
     public boolean bookARide(java.sql.Date date, RideAgenda ride,int nbrOfTickets,String reduction){
 
         if(controller==null)
