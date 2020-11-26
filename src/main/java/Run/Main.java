@@ -55,7 +55,7 @@ public class Main {
                 if(controller.isAnEmployee("Thomas.shelby@free.fr"))
                     System.out.println("As employee");
             }
-            
+
            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
               System.out.println("booked");
 
