@@ -247,14 +247,25 @@ public class ModelSQL {
         }
     }
 
-    public void bookARide(java.sql.Date date, String nameRide,String email ,double price, int nbrOfTicket){
+    public void bookARide(java.sql.Date date, String nameRide,String email ,double price, int nbrOfTicket, String reduction){
+
+        double reductionDouble = 1;
+        if(reduction.equals("Normal"))
+            reductionDouble=1;
+        else if(reduction.equals("Senior"))
+            reductionDouble=0.9;
+        else if(reduction.equals("Child"))
+            reductionDouble=0.7;
+        else if(reduction.equals("Young"))
+            reductionDouble=0.85;
+
         String query = "INSERT INTO History (customerEmail,rideName,dateOfRide,numberOfTickets,price) VALUES"+
                 "("
                 + "'"+ email +"'"+","
                 +"'"+ nameRide +"'"+","
                 +"'"+date+"'"+","
                 +"'"+nbrOfTicket+"'"+","
-                +"'"+price+"'"
+                +"'"+price*reductionDouble+"'"
                 +   ")";
 
         try {

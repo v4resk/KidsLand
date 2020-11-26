@@ -27,14 +27,14 @@ public abstract class Person {
     public void setController(Controller controller){this.controller = controller; }
 //----------------------------------------------------------------------------------------------------------
 
-    public boolean bookARide(java.sql.Date date, RideAgenda ride,int nbrOfTickets){
+
+    public boolean bookARide(java.sql.Date date, RideAgenda ride,int nbrOfTickets,String reduction){
+
         if(controller==null)
             return false;
         if(!controller.canIBook(nbrOfTickets,date,ride))
             return false;
-        return controller.bookARide(date,ride.getRide().getName(),email,ride.getPrice()*this.calculateDiscount(),nbrOfTickets);
+        return controller.bookARide(date,ride.getRide().getName(),email,ride.getPrice(),nbrOfTickets,reduction);
     }
-
-    public abstract double calculateDiscount();
 
 }

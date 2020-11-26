@@ -1,10 +1,8 @@
 package Run;
 
-//** TO-DO LIST
-//              : in person class :
-//
-//                                  remove places in agenda when book
-//                                  discount
+//** TO-DO LIST : Gui implements back-end
+//                  Add employee fonctions;
+
 
 
 import Controller.*;
@@ -20,6 +18,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class Main {
@@ -56,6 +55,11 @@ public class Main {
                 if(controller.isAnEmployee("Thomas.shelby@free.fr"))
                     System.out.println("As employee");
             }
+
+
+            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(1),10,"Normal"))
+               System.out.println("booked");
+
 
 
             System.out.println(agenda.toString());
