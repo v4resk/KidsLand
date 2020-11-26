@@ -146,9 +146,9 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent actionEvent) {
 				if(controller.signIn_check(textField_2.getText(),String.valueOf(textField_1.getPassword()))) {
 				if (controller.isAnEmployee(textField_2.getText()))
-					System.out.println("Loged in as employee"); // Ouvrir feunetre employee
+					JOptionPane.showMessageDialog(null,"LogIn as Employee");
 				else
-					System.out.println("Loged in as Member"); // ICI Ouvrir la feunetre principale
+					JOptionPane.showMessageDialog(null,"LogIn as Member");
 			}
 				else
 					JOptionPane.showMessageDialog(null,"LOGIN FAIL","ERROR",JOptionPane.ERROR_MESSAGE);
