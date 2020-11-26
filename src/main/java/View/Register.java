@@ -1,22 +1,18 @@
 package View;
 
+import Controller.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 public class Register extends JFrame {
 
@@ -25,9 +21,10 @@ public class Register extends JFrame {
 	private JTextField textField1;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
+	private JPasswordField textField_3;
 	private JButton btnNewButton_2;
-
+	private JButton btnNewButton;
+	private Controller controller;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +33,8 @@ public class Register extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Register() {
+	public Register(Controller controller) {
+		this.controller = controller;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
@@ -72,7 +70,7 @@ public class Register extends JFrame {
 		textField_2.setBounds(175, 245, 350, 20);
 		contentPane.add(textField_2);
 		
-		textField_3 = new JTextField();
+		textField_3 = new JPasswordField();
 		textField_3.setColumns(10);
 		textField_3.setBorder(null);
 		textField_3.setBounds(175, 295, 350, 20);
@@ -83,8 +81,10 @@ public class Register extends JFrame {
 		lblNewLabel.setBounds(300, 35, 100, 20);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("REGISTER NOW");
+		btnNewButton = new JButton("REGISTER NOW");
 		btnNewButton.setBounds(250, 350, 200, 30);
+		btnNewButton.setBackground(new Color(245, 245, 245));
+		btnNewButton.addActionListener(new RegisterListener());
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("Name");
@@ -109,7 +109,10 @@ public class Register extends JFrame {
 		
 		btnNewButton_2 = new JButton("Return");
 		btnNewButton_2.setBounds(609, 6, 85, 29);
+		btnNewButton_2.setBorderPainted(false);
+		btnNewButton_2.setFocusPainted(false);
 		btnNewButton_2.addActionListener(new RegisterListener());
+		btnNewButton_2.setBackground(new Color(245, 245, 245));
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
@@ -129,13 +132,26 @@ public class Register extends JFrame {
 private class RegisterListener implements ActionListener{
 		
 		public void actionPerformed (ActionEvent e) {
+
 			Object buttonClose = e.getSource();
-			
-			
-			if (buttonClose == btnNewButton_2) {
+
+			if(buttonClose== btnNewButton_2)
+			{
 				dispose();
+				new GuestOrSignUp(controller);
 			}
-			
+			else if(e.getSource()==btnNewButton){
+				if(!(textField.getText().isEmpty() || textField1.getText().isEmpty()
+						|| textField_1.getText().isEmpty()
+				|| textField_2 .getText().isEmpty() || String.valueOf(textField_3.getPassword()).isEmpty())){
+
+
+					controller.db_addMember(textField_1.getText(),textField.getText(), Date.valueOf(textField1.getText()),textField_2.getText(),String.valueOf(textField_3.getPassword()));
+					JOptionPane.showMessageDialog(null,"sign up successfully");
+				}else{
+					JOptionPane.showMessageDialog(null,"All fields need to be fill","ERROR",JOptionPane.ERROR_MESSAGE);
+				}
+			}
 			
 			
 		}

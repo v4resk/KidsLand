@@ -25,8 +25,8 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "Alex08";
-        final String user = "alex";
+        final String passwd = "root";
+        final String user = "v4resk";
         
 
         try {

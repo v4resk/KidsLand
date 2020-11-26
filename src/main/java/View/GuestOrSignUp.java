@@ -1,5 +1,7 @@
 package View;
 
+import Controller.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -27,6 +29,7 @@ public class GuestOrSignUp extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel;
+	private Controller controller;
 	
 
 	/**
@@ -36,8 +39,8 @@ public class GuestOrSignUp extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GuestOrSignUp() {
-		
+	public GuestOrSignUp(Controller controller) {
+		this.controller = controller;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
@@ -49,7 +52,7 @@ public class GuestOrSignUp extends JFrame {
 		
 		btnNewButton = new JButton("Register");
 		btnNewButton.setForeground(new Color(0, 0, 0));
-		btnNewButton.setBackground(new Color (0, 0, 255));
+		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new GuestOrSignUpListener());
 		btnNewButton.setBounds(225, 150, 250, 35);
@@ -57,7 +60,7 @@ public class GuestOrSignUp extends JFrame {
 		
 		btnNewButton1 = new JButton("Continue as guest");
 		btnNewButton1.setForeground(new Color(0, 0, 0));
-		btnNewButton1.setBackground(new Color (0, 0, 255));
+		btnNewButton1.setBackground(new Color(245, 245, 245));
 		btnNewButton1.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton1.setBounds(225, 275, 250, 35);
 		btnNewButton1.addActionListener(new GuestOrSignUpListener());
@@ -65,6 +68,8 @@ public class GuestOrSignUp extends JFrame {
 		
 		btnNewButton_2 = new JButton("Return");
 		btnNewButton_2.setBounds(609, 6, 85, 29);
+		btnNewButton_2.setBackground(new Color(245, 245, 245));
+		btnNewButton_2.setFocusPainted(false);
 		btnNewButton_2.addActionListener(new GuestOrSignUpListener());
 		contentPane.add(btnNewButton_2);
 		
@@ -84,6 +89,7 @@ public class GuestOrSignUp extends JFrame {
 		
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 	
 	private class GuestOrSignUpListener implements ActionListener {
@@ -91,18 +97,16 @@ public class GuestOrSignUp extends JFrame {
 		
 		public void actionPerformed (ActionEvent e)
 		{
-			
-			Object buttonRegister =e.getSource();
-			Object buttonClose = e.getSource();
-			
-			if(buttonClose== btnNewButton_2)
+
+			if(e.getSource()== btnNewButton_2)
 			{
 				dispose();
+				new Login(controller);
 			}
-			
-			if(buttonRegister == btnNewButton)
+			else if(e.getSource() == btnNewButton)
 			{
-				Register frame = new Register();
+				dispose();
+				Register frame = new Register(controller);
 				frame.setVisible(true);
 			}
 		}

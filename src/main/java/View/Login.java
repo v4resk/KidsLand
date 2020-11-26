@@ -47,7 +47,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		btnNewButton = new JButton("Login");
-		btnNewButton.setBackground(new Color(150, 245, 255));
+		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.setBounds(80, 275, 250, 35);
 		btnNewButton.addActionListener(new LoginCheckListener());
@@ -63,7 +63,7 @@ public class Login extends JFrame {
 		
 		btnNewButton_1 = new JButton("Not yet registered, register now");
 		btnNewButton_1.setFont(new Font("Monaco", Font.PLAIN, 12));
-		btnNewButton_1.setBackground(new Color(150, 245, 255));
+		btnNewButton_1.setBackground(new Color(245, 245, 245));
 		btnNewButton_1.setBounds(80, 325, 250, 35);
 		btnNewButton_1.addActionListener(new LoginListener());
 		contentPane.add(btnNewButton_1);
@@ -72,6 +72,7 @@ public class Login extends JFrame {
 		btnNewButton_2.setBackground(new Color(224, 255, 255));
 		btnNewButton_2.setBounds(645, 2,50,50);
 		btnNewButton_2.setFocusPainted(false);
+		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setContentAreaFilled(false);
 		btnNewButton_2.addActionListener(new LoginListener());
 		contentPane.add(btnNewButton_2);
@@ -126,8 +127,8 @@ public class Login extends JFrame {
 			Object buttonClose = e.getSource();
 			
 			if(button == btnNewButton_1) {
-				GuestOrSignUp frame = new GuestOrSignUp();
-				frame.setVisible(true);
+				dispose();
+				GuestOrSignUp frame = new GuestOrSignUp(controller);
 			}
 			
 			if (buttonClose == btnNewButton_2) {
@@ -144,7 +145,7 @@ public class Login extends JFrame {
 		
 		public void actionPerformed(ActionEvent actionEvent) {
 				if(controller.signIn_check(textField_2.getText(),String.valueOf(textField_1.getPassword()))) {
-				if (controller.isAnEmployee("Thomas.shelby@free.fr"))
+				if (controller.isAnEmployee(textField_2.getText()))
 					System.out.println("Loged in as employee"); // Ouvrir feunetre employee
 				else
 					System.out.println("Loged in as Member"); // ICI Ouvrir la feunetre principale
