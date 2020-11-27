@@ -55,14 +55,14 @@ public class GuestOrSignUp extends JFrame {
 		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new GuestOrSignUpListener());
-		btnNewButton.setBounds(225, 170, 250, 35);
+		btnNewButton.setBounds(225, 200, 250, 35);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton1 = new JButton("Continue as guest");
 		btnNewButton1.setForeground(new Color(0, 0, 0));
 		btnNewButton1.setBackground(new Color(245, 245, 245));
 		btnNewButton1.setFont(new Font("Monaco", Font.PLAIN, 12));
-		btnNewButton1.setBounds(225, 275, 250, 35);
+		btnNewButton1.setBounds(225, 250, 250, 35);
 		btnNewButton1.addActionListener(new GuestOrSignUpListener());
 		contentPane.add(btnNewButton1);
 		
@@ -118,20 +118,24 @@ public class GuestOrSignUp extends JFrame {
 				
 			}
 			
-			
-			
-			
-			
 			else if(e.getSource()==btnNewButton1)
 			{
-				new Calendar(new Guest(),2);
+				Guest guest = new Guest();
+				guest.setController(controller);
+				new Calendar(guest,2);
 				dispose();
-				
 
 			}
+			
+			
+			
 		}
-
-		
-		
 	}
 }
+			
+			
+			
+			
+			
+
+	
