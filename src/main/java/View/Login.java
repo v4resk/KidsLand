@@ -129,7 +129,7 @@ public class Login extends JFrame {
 			if(button == btnNewButton_1) {
 				dispose();
 				GuestOrSignUp frame = new GuestOrSignUp(controller);
-			}
+			} 
 			
 			if (buttonClose == btnNewButton_2) {
 				dispose();
@@ -146,9 +146,16 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent actionEvent) {
 				if(controller.signIn_check(textField_2.getText(),String.valueOf(textField_1.getPassword()))) {
 				if (controller.isAnEmployee(textField_2.getText()))
+				{
 					JOptionPane.showMessageDialog(null,"LogIn as Employee");
-				else
+					new Calendar();
+				}
+				else {
 					JOptionPane.showMessageDialog(null,"LogIn as Member");
+					new Calendar();
+				}
+					
+				
 			}
 				else
 					JOptionPane.showMessageDialog(null,"LOGIN FAIL","ERROR",JOptionPane.ERROR_MESSAGE);

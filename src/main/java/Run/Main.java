@@ -6,11 +6,13 @@ package Run;
 
 
 import Controller.*;
+
 import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
+import View.Calendar;
 
 
 import java.sql.Connection;
@@ -33,7 +35,8 @@ public class Main {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
-            new Login(controller);
+           new Login(controller);
+           
 
             //------------TEST---------------------------------
 
