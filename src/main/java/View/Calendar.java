@@ -26,15 +26,18 @@ import java.awt.Cursor;
 import javax.swing.DebugGraphics;
 import javax.swing.JCheckBoxMenuItem;
 import java.awt.Font;
+import java.time.Period;
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.components.JLocaleChooser;
 
-import Controller.Controller;
+import Controller.*;
 
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JDayChooser;
 import javax.swing.JButton;
+
 
 public class Calendar extends JFrame {
 
@@ -43,14 +46,36 @@ public class Calendar extends JFrame {
 	private JSlider slider;
 	private JButton btnNewButton_2;
 	private Controller controller;
-	
+	private Member member;
+	private Guest guest;
+	private Employee employee;
+	private int id; // 1=membre , 2=guest, 3=employee
 
 
 	/**
 	 * Create the frame.
 	 */
-	public Calendar() {
-	
+	public Calendar(Person person, int id) {
+
+		if(id==1){
+			member = new Member(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
+			member.setController(person.getController());
+			guest = null;
+			employee = null;
+		}
+		if(id==2){
+			guest = new Guest();
+			guest.setController(person.getController());
+			employee = null;
+			member = null;
+		}
+		if(id==3){
+			employee = new Employee(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
+			employee.setController(person.getController());
+			member = null;
+			guest = null;
+		}
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
 		contentPane = new JPanel();
@@ -71,7 +96,7 @@ public class Calendar extends JFrame {
 		slider.setValue(0);
 		slider.setMaximum(5);
 		slider.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		slider.setBackground(SystemColor.windowText);
+		slider.setOpaque(false);
 		slider.setBounds(15, 70, 150, 46);
 		contentPane.add(slider);
 		
@@ -85,7 +110,7 @@ public class Calendar extends JFrame {
 		slider_1.setMajorTickSpacing(1);
 		slider_1.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		slider_1.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		slider_1.setBackground(SystemColor.windowText);
+		slider_1.setOpaque(false);
 		slider_1.setBounds(365, 70, 150, 46);
 		contentPane.add(slider_1);
 		
@@ -99,7 +124,7 @@ public class Calendar extends JFrame {
 		slider_2.setMajorTickSpacing(1);
 		slider_2.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		slider_2.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		slider_2.setBackground(SystemColor.windowText);
+		slider_2.setOpaque(false);
 		slider_2.setBounds(195, 70, 150, 46);
 		contentPane.add(slider_2);
 		
@@ -113,7 +138,7 @@ public class Calendar extends JFrame {
 		slider_3.setMajorTickSpacing(1);
 		slider_3.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		slider_3.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		slider_3.setBackground(SystemColor.windowText);
+		slider_3.setOpaque(false);
 		slider_3.setBounds(535, 70, 150, 46);
 		contentPane.add(slider_3);
 		
@@ -126,7 +151,7 @@ public class Calendar extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Young (12-25)");
 		lblNewLabel_1.setForeground(Color.BLACK);
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(225, 50, 106, 16);
+		lblNewLabel_1.setBounds(215, 50, 120, 16);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Regular");
@@ -148,6 +173,8 @@ public class Calendar extends JFrame {
 		
 		JButton btnNewButton = new JButton("Book");
 		btnNewButton.setBounds(554, 150, 117, 225);
+		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
+		btnNewButton.setBackground(new Color(245, 245, 245));
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_2 = new JButton("Return");
@@ -155,7 +182,9 @@ public class Calendar extends JFrame {
 		btnNewButton_2.setBorderPainted(false);
 		btnNewButton_2.setFocusPainted(false);
 		btnNewButton_2.addActionListener(new CalendarListener());
-		btnNewButton_2.setBackground(new Color(245, 245, 245));
+		btnNewButton_2.setFocusPainted(false);
+		btnNewButton_2.setBorderPainted(false);
+		btnNewButton_2.setContentAreaFilled(false);
 		contentPane.add(btnNewButton_2);
 		
 		labelDecor = new JLabel("");
@@ -167,6 +196,12 @@ public class Calendar extends JFrame {
 		setLocationRelativeTo(null);
 
 		setVisible(true);
+
+		if(id==1)
+			System.out.println("Register as"+member.getEmail());
+		if(id==3)
+			System.out.println("Register as"+employee.getEmail());
+
 	}
 	
 	private class CalendarListener implements ActionListener{

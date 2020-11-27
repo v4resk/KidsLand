@@ -301,6 +301,15 @@ public class ModelSQL {
             System.out.println("VendorError: " + e.getErrorCode());
         }
     }
+
+    public Person getPerson(String email){
+        for (int i=0; i<personList.size();i++){
+            if(personList.get(i).getEmail().equals(email))
+                return (personList.get(i));
+        }
+        return null;
+    }
+
 //---------------------------------------------------------------------------------------------------------
 //--------------------------------------CECK AND VERIF-----------------------------------------------------
 public boolean checkIfRideAgendaExist(String name,java.sql.Date date){

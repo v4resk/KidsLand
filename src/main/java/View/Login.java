@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Controller;
+import Controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -148,12 +148,15 @@ public class Login extends JFrame {
 				if (controller.isAnEmployee(textField_2.getText()))
 				{
 					JOptionPane.showMessageDialog(null,"LogIn as Employee");
-					new Calendar();
+					Person employee = controller.getPerson(textField_2.getText());
+					new Calendar(employee,3);
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"LogIn as Member");
-					new Calendar();
+					Person member = controller.getPerson(textField_2.getText());
+					new Calendar(member,1);
 				}
+					dispose();
 					
 				
 			}

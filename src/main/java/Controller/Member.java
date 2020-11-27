@@ -10,5 +10,4 @@ public class Member extends Person {
         super(name, firstName, age,email);
     }
 
-
 }

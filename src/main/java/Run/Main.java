@@ -13,7 +13,7 @@ import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
 import com.toedter.calendar.JCalendar;
-import View.Calendar;
+import java.util.Calendar;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -25,8 +25,8 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "Alex08";
-        final String user = "alex";
+        final String passwd = "root";
+        final String user = "v4resk";
 
 
         try {
@@ -34,7 +34,6 @@ public class Main {
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
            new Login(controller);
-           
 
             //------------TEST---------------------------------
             
