@@ -26,7 +26,15 @@ import java.awt.Cursor;
 import javax.swing.DebugGraphics;
 import javax.swing.JCheckBoxMenuItem;
 import java.awt.Font;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.components.JLocaleChooser;
@@ -50,12 +58,16 @@ public class Calendar extends JFrame {
 	private Guest guest;
 	private Employee employee;
 	private int id; // 1=membre , 2=guest, 3=employee
+	private HashMap<Date, ArrayList<RideAgenda>> agenda;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public Calendar(Person person, int id) {
+
+		controller = person.getController();
+		agenda = controller.getAgenda();
 
 		if(id==1){
 			member = new Member(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
@@ -194,6 +206,24 @@ public class Calendar extends JFrame {
 		
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+
+		// Disable some Date in agenda
+		TimeEvaluator evaluator = new TimeEvaluator();
+		for (Date i : agenda.keySet()){
+			evaluator.add(i);
+		}
+
+		// Select the StartDate and EndDate
+		Date minDate = Date.valueOf(LocalDate.now());
+		Date maxDate = Collections.max(agenda.keySet());
+		evaluator.setStartDate(minDate);
+		evaluator.setEndDate(maxDate);
+		calendar.getDayChooser().addDateEvaluator(evaluator);
+
+		//Refresh
+		calendar.setCalendar(calendar.getCalendar());
+
+
 
 		setVisible(true);
 

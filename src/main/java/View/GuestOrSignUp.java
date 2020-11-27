@@ -113,9 +113,10 @@ public class GuestOrSignUp extends JFrame {
 			
 			else if(e.getSource()==btnNewButton1)
 			{
-
+				Guest guest = new Guest();
+				guest.setController(controller);
+				new Calendar(guest,2);
 				dispose();
-				new Calendar(new Guest(),2);
 
 			}
 		}

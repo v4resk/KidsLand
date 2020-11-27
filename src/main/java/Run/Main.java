@@ -12,6 +12,7 @@ import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
+import View.TimeEvaluator;
 import com.toedter.calendar.JCalendar;
 import java.util.Calendar;
 import java.sql.Connection;
@@ -25,8 +26,10 @@ public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "Alex08";
-        final String user = "alex";
+        final String passwd = "root";
+        final String user = "v4resk";
+
+
 
 
         try {
