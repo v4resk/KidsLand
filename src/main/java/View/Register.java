@@ -115,7 +115,7 @@ public class Register extends JFrame {
 		btnNewButton_2.setBackground(new Color(245, 245, 245));
 		contentPane.add(btnNewButton_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
+		JLabel lblNewLabel_3 = new JLabel("");
 		Image img = new ImageIcon(this.getClass().getResource("/CloudLogin.png")).getImage();
 		lblNewLabel_3.setIcon(new ImageIcon(img));
 		lblNewLabel_3.setBounds(0, 0, 711, 413);
@@ -125,6 +125,7 @@ public class Register extends JFrame {
 		
 		setUndecorated(true);
 		setLocationRelativeTo(null);
+		setVisible(true);
 		
 	}
 	
@@ -148,10 +149,12 @@ private class RegisterListener implements ActionListener{
 
 					controller.db_addMember(textField_1.getText(),textField.getText(), Date.valueOf(textField1.getText()),textField_2.getText(),String.valueOf(textField_3.getPassword()));
 					JOptionPane.showMessageDialog(null,"sign up successfully");
+					new Calendar();
 				}else{
 					JOptionPane.showMessageDialog(null,"All fields need to be fill","ERROR",JOptionPane.ERROR_MESSAGE);
 				}
 			}
+			
 			
 			
 		}

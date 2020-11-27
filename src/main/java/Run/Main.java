@@ -6,21 +6,19 @@ package Run;
 
 
 import Controller.*;
+
 import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
 import com.toedter.calendar.JCalendar;
-import org.jdatepicker.JDatePicker;
-
-
+import View.Calendar;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class Main {
@@ -35,7 +33,8 @@ public class Main {
             Connection conn = DriverManager.getConnection(url,user,passwd);
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
-            new Login(controller);
+           new Login(controller);
+           
 
             //------------TEST---------------------------------
             

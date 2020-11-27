@@ -106,8 +106,13 @@ public class GuestOrSignUp extends JFrame {
 			else if(e.getSource() == btnNewButton)
 			{
 				dispose();
-				Register frame = new Register(controller);
-				frame.setVisible(true);
+				new Register(controller);
+			}
+			
+			else if(e.getSource()==btnNewButton1)
+			{
+				dispose();
+				new Calendar();
 			}
 		}
 
