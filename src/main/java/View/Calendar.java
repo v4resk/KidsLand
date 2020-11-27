@@ -57,6 +57,7 @@ public class Calendar extends JFrame {
 	private Member member;
 	private Guest guest;
 	private Employee employee;
+	private JButton btnNewButton;
 	private int id; // 1=membre , 2=guest, 3=employee
 	private HashMap<Date, ArrayList<RideAgenda>> agenda;
 
@@ -183,7 +184,8 @@ public class Calendar extends JFrame {
 		calendar.setBounds(20, 148, 525, 229);
 		contentPane.add(calendar);
 		
-		JButton btnNewButton = new JButton("Book");
+		btnNewButton = new JButton("Book");
+		btnNewButton.addActionListener(new CalendarListener()); 
 		btnNewButton.setBounds(554, 150, 117, 225);
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.setBackground(new Color(245, 245, 245));
@@ -242,6 +244,12 @@ public class Calendar extends JFrame {
 			{
 				new Login(controller);
 				dispose();
+				
+			}
+			
+			else if(e.getSource()==btnNewButton) {
+				
+				new RideBook(controller);
 				
 			}
 		}

@@ -117,6 +117,8 @@ public class Controller {
      public HashMap<java.sql.Date,ArrayList<RideAgenda>> getAgenda(){
         return mSql.getAgenda();
      }
+     
+     public ArrayList <Ride> getRideList(){return mSql.getRideList();} 
 
     //---------------------------------------------------------------------------------------------------------
     //--------------------------------VERIFICATION FUNCTIONS-------------------------------------------------------------
