@@ -71,7 +71,7 @@ public class Calendar extends JFrame {
 		slider.setValue(0);
 		slider.setMaximum(5);
 		slider.setBorder(new MatteBorder(0, 0, 0, 0, (Color) new Color(0, 0, 0)));
-		slider.setBackground(SystemColor.windowText);
+		slider.setOpaque(false);
 		slider.setBounds(15, 70, 150, 46);
 		contentPane.add(slider);
 		
@@ -175,8 +175,9 @@ public class Calendar extends JFrame {
 		{
 			if(e.getSource()==btnNewButton_2)
 			{
-				dispose();
 				new Login(controller);
+				dispose();
+				
 			}
 		}
 	}

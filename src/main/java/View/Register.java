@@ -95,8 +95,8 @@ public class Register extends JFrame {
 		lblNewLabel_2.setBounds(175, 125, 100, 20);
 		contentPane.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Date of Birth");
-		lblNewLabel_1_1_1.setBounds(175, 175, 100, 20);
+		JLabel lblNewLabel_1_1_1 = new JLabel("Date of Birth (AAAA-MM-DD)");
+		lblNewLabel_1_1_1.setBounds(175, 175, 209, 20);
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Email Adress");
@@ -138,8 +138,9 @@ private class RegisterListener implements ActionListener{
 
 			if(buttonClose== btnNewButton_2)
 			{
-				dispose();
 				new GuestOrSignUp(controller);
+				dispose();
+				
 			}
 			else if(e.getSource()==btnNewButton){
 				if(!(textField.getText().isEmpty() || textField1.getText().isEmpty()

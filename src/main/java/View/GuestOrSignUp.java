@@ -100,19 +100,22 @@ public class GuestOrSignUp extends JFrame {
 
 			if(e.getSource()== btnNewButton_2)
 			{
-				dispose();
 				new Login(controller);
+				dispose();
+				
 			}
 			else if(e.getSource() == btnNewButton)
 			{
-				dispose();
 				new Register(controller);
+				dispose();
+				
 			}
 			
 			else if(e.getSource()==btnNewButton1)
 			{
-				dispose();
 				new Calendar();
+				dispose();
+				
 			}
 		}
 

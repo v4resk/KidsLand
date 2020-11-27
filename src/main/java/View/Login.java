@@ -127,8 +127,9 @@ public class Login extends JFrame {
 			Object buttonClose = e.getSource();
 			
 			if(button == btnNewButton_1) {
+				new GuestOrSignUp(controller);
 				dispose();
-				GuestOrSignUp frame = new GuestOrSignUp(controller);
+				
 			} 
 			
 			if (buttonClose == btnNewButton_2) {

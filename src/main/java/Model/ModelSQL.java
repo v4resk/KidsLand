@@ -276,7 +276,6 @@ public class ModelSQL {
             System.out.println("SQLException: " + e.getMessage());
             System.out.println("SQLState: " + e.getSQLState());
             System.out.println("VendorError: " + e.getErrorCode());
-            System.out.println("lllll");
         }
     }
 
