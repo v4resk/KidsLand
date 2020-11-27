@@ -20,43 +20,39 @@ public class TimeEvaluator implements IDateEvaluator {
         list.add(date);
     }
 
-    @Override
     public boolean isSpecial(Date date) {
         return list.contains(date);
     }
 
-    @Override
     public Color getSpecialForegroundColor() {
         return null;
     }
 
-    @Override
     public Color getSpecialBackroundColor() {
         return null;
     }
 
-    @Override
     public String getSpecialTooltip() {
         return null;
     }
 
-    @Override
+    
     public boolean isInvalid(Date date) {
         // if the date is Out of range it will be invalid and if she is not in the list
         return !list.contains(date) || !dateUtil.checkDate(date);
     }
 
-    @Override
+    
     public Color getInvalidForegroundColor() {
         return null;
     }
 
-    @Override
+    
     public Color getInvalidBackroundColor() {
         return null;
     }
 
-    @Override
+   
     public String getInvalidTooltip() {
         return null;
     }

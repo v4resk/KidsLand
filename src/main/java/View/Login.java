@@ -96,9 +96,9 @@ public class Login extends JFrame {
 		contentPane.add(textField_2);
 		
 		lblNewLabel_2 = new JLabel("");
-		Image img = new ImageIcon(this.getClass().getResource("/image.jpg")).getImage();
+		Image img = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
 		lblNewLabel_2.setIcon(new ImageIcon(img));
-		lblNewLabel_2.setBounds(423, 63, 250, 297);
+		lblNewLabel_2.setBounds(489, 130, 160, 171);
 		contentPane.add(lblNewLabel_2);
 		
 		lblNewLabel_5 = new JLabel("");
