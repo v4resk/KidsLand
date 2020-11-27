@@ -15,7 +15,7 @@ public class TimeEvaluator implements IDateEvaluator {
 
     private DateUtil dateUtil = new DateUtil();
 
-    private ArrayList<Date> list = new ArrayList<>();
+    private ArrayList<Date> list = new ArrayList<Date>();
     public void add(Date date) {
         list.add(date);
     }

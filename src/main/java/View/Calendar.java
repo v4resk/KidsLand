@@ -183,7 +183,7 @@ public class Calendar extends JFrame {
 		calendar.setBounds(20, 148, 525, 229);
 		contentPane.add(calendar);
 		
-		JButton btnNewButton = new JButton("Book");
+		JButton btnNewButton = new JButton("Availabilities");
 		btnNewButton.setBounds(554, 150, 117, 225);
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.setBackground(new Color(245, 245, 245));
