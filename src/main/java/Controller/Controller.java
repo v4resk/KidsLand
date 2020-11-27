@@ -111,6 +111,10 @@ public class Controller {
          return true;
      }
 
+     public Person getPerson(String email){
+        return mSql.getPerson(email);
+     }
+
 
     //---------------------------------------------------------------------------------------------------------
     //--------------------------------VERIFICATION FUNCTIONS-------------------------------------------------------------

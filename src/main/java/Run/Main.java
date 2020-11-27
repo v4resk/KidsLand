@@ -12,15 +12,13 @@ import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
-import View.Calendar;
-
-
+import com.toedter.calendar.JCalendar;
+import java.util.Calendar;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.*;
 import java.util.HashMap;
 
 public class Main {
@@ -36,10 +34,9 @@ public class Main {
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
            new Login(controller);
-           
 
             //------------TEST---------------------------------
-
+            
             long millis=System.currentTimeMillis();
             java.sql.Date date = Date.valueOf("2020-11-25");
             ArrayList<Ride> listRide= msql.getRideList();
@@ -59,9 +56,9 @@ public class Main {
                     System.out.println("As employee");
             }
 
-
            if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
               System.out.println("booked");
+
 
 
 

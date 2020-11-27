@@ -137,4 +137,3 @@ INSERT INTO Time(name,date_m,placeNbrUsed,price) VALUES
 ('CuteAnimals','2021-01-30',0,10),
 ('BoatTrip','2021-01-30',0,10),
 ('CandyWorld','2021-01-30',0,7);
-

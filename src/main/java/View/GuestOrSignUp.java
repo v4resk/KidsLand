@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Controller;
+import Controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -113,9 +113,10 @@ public class GuestOrSignUp extends JFrame {
 			
 			else if(e.getSource()==btnNewButton1)
 			{
-				new Calendar();
+
 				dispose();
-				
+				new Calendar(new Guest(),2);
+
 			}
 		}
 

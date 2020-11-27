@@ -1,6 +1,6 @@
 package View;
 
-import Controller.Controller;
+import Controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -126,6 +126,7 @@ public class Register extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
+
 		
 	}
 	
@@ -150,7 +151,8 @@ private class RegisterListener implements ActionListener{
 
 					controller.db_addMember(textField_1.getText(),textField.getText(), Date.valueOf(textField1.getText()),textField_2.getText(),String.valueOf(textField_3.getPassword()));
 					JOptionPane.showMessageDialog(null,"sign up successfully");
-					new Calendar();
+					Person member = controller.getPerson(textField_2.getText());
+					new Calendar(member,1);
 				}else{
 					JOptionPane.showMessageDialog(null,"All fields need to be fill","ERROR",JOptionPane.ERROR_MESSAGE);
 				}

@@ -1,6 +1,8 @@
 package Controller;
 
 
+import java.sql.Date;
+
 public abstract class Person {
     protected String firstName;
     protected String name;
@@ -23,6 +25,19 @@ public abstract class Person {
     public String getName() {
         return name;
     }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+    public Date getAge() {
+        return age;
+    }
+
+
     // Need to set a controller if you want to interact with DB/ BOOK tickets....
     public void setController(Controller controller){this.controller = controller; }
 //----------------------------------------------------------------------------------------------------------
