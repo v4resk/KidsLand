@@ -11,6 +11,8 @@ import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
+import com.toedter.calendar.JCalendar;
+import org.jdatepicker.JDatePicker;
 
 
 import java.sql.Connection;
@@ -36,7 +38,7 @@ public class Main {
             new Login(controller);
 
             //------------TEST---------------------------------
-
+            
             long millis=System.currentTimeMillis();
             java.sql.Date date = Date.valueOf("2020-11-25");
             ArrayList<Ride> listRide= msql.getRideList();

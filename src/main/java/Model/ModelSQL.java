@@ -250,13 +250,13 @@ public class ModelSQL {
     public void bookARide(java.sql.Date date, String nameRide,String email ,double price, int nbrOfTicket, String reduction){
 
         double reductionDouble = 1;
-        if(reduction.equals("Normal"))
+        if(reduction.equals("Normal"))   //
             reductionDouble=1;
-        else if(reduction.equals("Senior"))
+        else if(reduction.equals("Senior")) // +65yo
             reductionDouble=0.9;
-        else if(reduction.equals("Child"))
+        else if(reduction.equals("Child")) // -11yo
             reductionDouble=0.7;
-        else if(reduction.equals("Young"))
+        else if(reduction.equals("Young")) // -25ans
             reductionDouble=0.85;
 
         String query = "INSERT INTO History (customerEmail,rideName,dateOfRide,numberOfTickets,price) VALUES"+
