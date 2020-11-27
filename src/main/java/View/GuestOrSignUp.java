@@ -55,7 +55,7 @@ public class GuestOrSignUp extends JFrame {
 		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new GuestOrSignUpListener());
-		btnNewButton.setBounds(225, 150, 250, 35);
+		btnNewButton.setBounds(225, 170, 250, 35);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton1 = new JButton("Continue as guest");
@@ -73,12 +73,19 @@ public class GuestOrSignUp extends JFrame {
 		btnNewButton_2.addActionListener(new GuestOrSignUpListener());
 		contentPane.add(btnNewButton_2);
 		
+		JLabel lblNewLabel_1 = new JLabel("");
+		Image img4 = new ImageIcon(this.getClass().getResource("/Logo.png")).getImage();
+		lblNewLabel_1.setIcon(new ImageIcon(img4));
+		lblNewLabel_1.setBounds(267, 35, 143, 103);
+		contentPane.add(lblNewLabel_1);
+		
 		lblNewLabel_2 = new JLabel("");
 		Image img2 = new ImageIcon(this.getClass().getResource("/Cloud1.png")).getImage();
 		lblNewLabel_2.setIcon(new ImageIcon(img2));
 		lblNewLabel_2.setBounds(235, 0, 465, 400);
 		contentPane.add(lblNewLabel_2);
 		
+
 		lblNewLabel = new JLabel("");
 		Image img3 = new ImageIcon(this.getClass().getResource("/Cloud1.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(img3));
@@ -111,11 +118,15 @@ public class GuestOrSignUp extends JFrame {
 				
 			}
 			
+			
+			
+			
+			
 			else if(e.getSource()==btnNewButton1)
 			{
-
-				dispose();
 				new Calendar(new Guest(),2);
+				dispose();
+				
 
 			}
 		}
@@ -123,5 +134,4 @@ public class GuestOrSignUp extends JFrame {
 		
 		
 	}
-
 }
