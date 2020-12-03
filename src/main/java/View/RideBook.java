@@ -1,27 +1,22 @@
 package View;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import Controller.*;
 
 
-import javax.swing.JScrollBar;
 import javax.swing.JList;
 
 public class RideBook extends JFrame {
@@ -32,7 +27,7 @@ public class RideBook extends JFrame {
 	private ArrayList <Ride> ridelist;
 	private Controller controller;
 	private JButton btnNewButton;
-	private AbstractButton btnNewButton_1;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Create the frame.
@@ -71,8 +66,6 @@ public class RideBook extends JFrame {
 		
 		list= new JList<String>(tableau);
 		list.setBackground(new Color(224,255,255));;
-		
-		
 		list.setBounds(0, 0, 349, 273);
 		contentPane.add(list);
 		
@@ -98,6 +91,11 @@ public class RideBook extends JFrame {
 			if(e.getSource()==btnNewButton)
 			{
 				dispose();
+			}
+			
+			if(e.getSource()==btnNewButton_1)
+			{
+				
 			}
 		}
 	}
