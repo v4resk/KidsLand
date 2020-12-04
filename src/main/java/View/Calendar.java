@@ -2,48 +2,45 @@ package View;
 
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
+import java.lang.Object;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
+
 import javax.swing.border.LineBorder;
-import javax.swing.JProgressBar;
 import javax.swing.JSlider;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
-import java.awt.SystemColor;
+import javax.swing.event.MenuListener;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.SwingConstants;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.awt.Component;
 import java.awt.Cursor;
 import javax.swing.DebugGraphics;
-import javax.swing.JCheckBoxMenuItem;
+
 import java.awt.Font;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 
+import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import com.toedter.calendar.JCalendar;
-import com.toedter.components.JLocaleChooser;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDayChooser;
 
 import Controller.*;
 
 
-import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JDayChooser;
+
 import javax.swing.JButton;
 
 
@@ -60,6 +57,8 @@ public class Calendar extends JFrame {
 	private JButton btnNewButton;
 	private int id; // 1=membre , 2=guest, 3=employee
 	private HashMap<Date, ArrayList<RideAgenda>> agenda;
+	private JCalendar calendar;
+
 
 
 	/**
@@ -69,20 +68,21 @@ public class Calendar extends JFrame {
 
 		controller = person.getController();
 		agenda = controller.getAgenda();
+		this.id=id;
 
-		if(id==1){
+		if(this.id==1){
 			member = new Member(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
 			member.setController(person.getController());
 			guest = null;
 			employee = null;
 		}
-		if(id==2){
+		if(this.id==2){
 			guest = new Guest();
 			guest.setController(person.getController());
 			employee = null;
 			member = null;
 		}
-		if(id==3){
+		if(this.id==3){
 			employee = new Employee(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
 			employee.setController(person.getController());
 			member = null;
@@ -180,12 +180,14 @@ public class Calendar extends JFrame {
 		lblNewLabel_3.setBounds(565, 50, 100, 16);
 		contentPane.add(lblNewLabel_3);
 		
-		JCalendar calendar = new JCalendar();
+		
+		calendar = new JCalendar();
 		calendar.setBounds(20, 148, 525, 229);
 		contentPane.add(calendar);
 		
-		btnNewButton = new JButton("Book");
-		btnNewButton.addActionListener(new CalendarListener()); 
+
+		btnNewButton = new JButton("Availabilities");
+		btnNewButton.addActionListener(new CalendarListener());
 		btnNewButton.setBounds(554, 150, 117, 225);
 		btnNewButton.setFont(new Font("Monaco", Font.PLAIN, 12));
 		btnNewButton.setBackground(new Color(245, 245, 245));
@@ -229,29 +231,32 @@ public class Calendar extends JFrame {
 
 		setVisible(true);
 
-		if(id==1)
+		if(this.id==1)
 			System.out.println("Register as"+member.getEmail());
-		if(id==3)
+		if(this.id==3)
 			System.out.println("Register as"+employee.getEmail());
 
 	}
 	
 	private class CalendarListener implements ActionListener{
-		
+
 		public void actionPerformed (ActionEvent e)
 		{
+			
 			if(e.getSource()==btnNewButton_2)
 			{
 				new Login(controller);
 				dispose();
-				
+
 			}
-			
+
 			else if(e.getSource()==btnNewButton) {
-				
-				new RideBook(controller);
-				
+
+				new RideBook(controller,calendar.getDate());
+
 			}
 		}
+		
+
 	}
 }

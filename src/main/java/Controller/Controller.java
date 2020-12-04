@@ -114,11 +114,9 @@ public class Controller {
      public Person getPerson(String email){
         return mSql.getPerson(email);
      }
-     public HashMap<java.sql.Date,ArrayList<RideAgenda>> getAgenda(){
-        return mSql.getAgenda();
-     }
-     
-     public ArrayList <Ride> getRideList(){return mSql.getRideList();} 
+     public HashMap<java.sql.Date,ArrayList<RideAgenda>> getAgenda(){ return mSql.getAgenda(); }
+     public ArrayList<Ride> getRideList(){return mSql.getRideList();}
+
 
     //---------------------------------------------------------------------------------------------------------
     //--------------------------------VERIFICATION FUNCTIONS-------------------------------------------------------------

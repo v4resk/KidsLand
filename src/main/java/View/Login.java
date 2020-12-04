@@ -150,11 +150,13 @@ public class Login extends JFrame {
 				{
 					JOptionPane.showMessageDialog(null,"LogIn as Employee");
 					Person employee = controller.getPerson(textField_2.getText());
+					employee.setController(controller);
 					new Calendar(employee,3);
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"LogIn as Member");
 					Person member = controller.getPerson(textField_2.getText());
+					member.setController(controller);
 					new Calendar(member,1);
 				}
 					dispose();
