@@ -61,7 +61,11 @@ public class Calendar extends JFrame {
 	private int id; // 1=membre , 2=guest, 3=employee
 	private HashMap<Date, ArrayList<RideAgenda>> agenda;
 	private JCalendar calendar;
-
+	private JSlider slider_1;
+	private JSlider slider_2;
+	private JSlider slider_3;
+	private String email;
+	private Person person;
 
 
 	/**
@@ -69,14 +73,17 @@ public class Calendar extends JFrame {
 	 */
 	public Calendar(Person person, int id) {
 
+		this.person = person;
 		controller = person.getController();
 		agenda = controller.getAgenda();
+		this.email = person.getEmail();
 
 		if(id==1){
 			member = new Member(person.getName(),person.getFirstName(),person.getAge(),person.getEmail());
 			member.setController(person.getController());
 			guest = null;
 			employee = null;
+
 		}
 		if(id==2){
 			guest = new Guest();
@@ -115,7 +122,7 @@ public class Calendar extends JFrame {
 		slider.setBounds(15, 70, 150, 46);
 		contentPane.add(slider);
 		
-		JSlider slider_1 = new JSlider();
+		slider_1 = new JSlider();
 		slider_1.setValue(1);
 		slider_1.setToolTipText("");
 		slider_1.setSnapToTicks(true);
@@ -129,7 +136,7 @@ public class Calendar extends JFrame {
 		slider_1.setBounds(365, 70, 150, 46);
 		contentPane.add(slider_1);
 		
-		JSlider slider_2 = new JSlider();
+		slider_2 = new JSlider();
 		slider_2.setValue(0);
 		slider_2.setToolTipText("");
 		slider_2.setSnapToTicks(true);
@@ -143,7 +150,7 @@ public class Calendar extends JFrame {
 		slider_2.setBounds(195, 70, 150, 46);
 		contentPane.add(slider_2);
 		
-		JSlider slider_3 = new JSlider();
+		slider_3 = new JSlider();
 		slider_3.setValue(0);
 		slider_3.setToolTipText("");
 		slider_3.setSnapToTicks(true);
@@ -247,13 +254,10 @@ public class Calendar extends JFrame {
 			{
 				new Login(controller);
 				dispose();
-
 			}
 
 			else if(e.getSource()==btnNewButton) {
-
-				new RideBook(controller,calendar.getDate());
-
+				new RideBook(controller,calendar.getDate(),slider.getValue(),slider_2.getValue(),slider_1.getValue(),slider_3.getValue(),person);
 			}
 		}
 	}

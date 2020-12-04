@@ -9,20 +9,11 @@ import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
 import java.util.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import Controller.*;
-
-
-
-import javax.swing.JScrollBar;
-import javax.swing.JList;
 
 
 public class RideBook extends JFrame {
@@ -35,13 +26,25 @@ public class RideBook extends JFrame {
 
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private int tChild=0;
+	private int tYoung=0;
+	private int tRegular=0;
+	private int tSenior=0;
+	private java.sql.Date sqlDate;
+	private Person person;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public RideBook(Controller controller, java.util.Date date) {
+	public RideBook(Controller controller, java.util.Date date, int tChild, int tYoung , int tRegular, int tSenior,Person person) {
+		this.person = person;
 		this.controller=controller;
+		this.tChild = tChild;
+		this.tRegular= tRegular;
+		this.tYoung = tYoung;
+		this.tSenior = tSenior;
+
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 349, 273);
@@ -49,7 +52,7 @@ public class RideBook extends JFrame {
 		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new LineBorder(UIManager.getColor("textHighlight"), 2));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout());
+		contentPane.setLayout(null);
 
 		// Show available ride
 		String pattern = "yyyy-MM-dd";
@@ -57,6 +60,8 @@ public class RideBook extends JFrame {
 		String strDate = dFormat.format(date);
 		System.out.println(strDate);
 		ridelist = controller.getAgenda().get(Date.valueOf(strDate));
+		sqlDate = Date.valueOf(strDate);
+
 
 		int size = ridelist.size();
 		String [] tableau = new String [size];
@@ -76,6 +81,7 @@ public class RideBook extends JFrame {
 		btnNewButton_1.setFocusPainted(false);
 		btnNewButton_1.setBackground(new Color(245, 245, 245));
 		btnNewButton_1.setBounds(183, 209, 125, 29);
+		btnNewButton_1.addActionListener(new RideBookListener());
 		contentPane.add(btnNewButton_1);
 		
 		list= new JList<String>(tableau);
@@ -83,7 +89,7 @@ public class RideBook extends JFrame {
 		
 		
 		list.setBounds(0, 0, 349, 273);
-		contentPane.add(list,BorderLayout.CENTER);
+		contentPane.add(list);
 		/*lblNewLabel_6 = new JLabel("");
 		Image img3 = new ImageIcon(this.getClass().getResource("/CloudLogin.png")).getImage();
 		lblNewLabel_6.setIcon(new ImageIcon(img3));
@@ -103,6 +109,39 @@ public class RideBook extends JFrame {
 			if(e.getSource()==btnNewButton)
 			{
 				dispose();
+			}
+			if(e.getSource()==btnNewButton_1){
+
+				String rideTxt = list.getSelectedValue();
+				RideAgenda rideAgenda = null;
+				for(int i=0 ; i< controller.getAgenda().get(sqlDate).size(); i++){
+					if(controller.getAgenda().get(sqlDate).get(i).getRide().getName().equals(rideTxt))
+						rideAgenda = controller.getAgenda().get(sqlDate).get(i);
+				}
+
+
+				if(controller.canIBook(tChild+tRegular+tYoung+tSenior,sqlDate,rideAgenda)) {
+					if (tChild > 0) {
+						if (person.bookARide(sqlDate, rideAgenda, tChild, "Child")) ;
+						System.out.println("ChildBooked");
+
+					}
+					if (tSenior > 0) {
+						person.bookARide(sqlDate, rideAgenda, tSenior, "Senior");
+						System.out.println("SeniorBooked");
+					}
+					if (tYoung > 0) {
+						person.bookARide(sqlDate, rideAgenda, tYoung, "Young");
+						System.out.println("YoungBooked");
+					}
+					if (tRegular > 0) {
+						person.bookARide(sqlDate, rideAgenda, tRegular, "Normal");
+						System.out.println("NormalBooked");
+					}
+				}
+				else
+					JOptionPane.showMessageDialog(null,"Not enough place to book");
+
 			}
 		}
 	}
