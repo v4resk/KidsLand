@@ -252,7 +252,7 @@ public class Calendar extends JFrame {
 			}
 
 			else if(e.getSource()==btnNewButton) {
-				new RideBook(controller,calendar.getDate(),slider.getValue(),slider_2.getValue(),slider_1.getValue(),slider_3.getValue(),person);
+				new RideBook(controller,calendar.getDate(),slider.getValue(),slider_2.getValue(),slider_1.getValue(),slider_3.getValue(),person,id);
 			}
 		}
 		

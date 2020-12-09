@@ -30,6 +30,9 @@ import java.awt.Font;
 
 public class RideBook extends JFrame {
 
+	private JLabel totalGuestnumbertxt;
+	private JLabel totalGuesttxt;
+	private JLabel totalGuestpricetxt;
 	private JLabel priceyoungtxt;
 	private JLabel totalpricetxt;
 	private JLabel priceseniortxt;
@@ -65,18 +68,20 @@ public class RideBook extends JFrame {
 	private JLabel numbertxt;
 	private RideAgenda rideAgenda;
 	private  double priceTotal;
+	private int id;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public RideBook(Controller controller, java.util.Date date, int tChild, int tYoung, int tRegular, int tSenior, Person person) {
+	public RideBook(Controller controller, java.util.Date date, int tChild, int tYoung, int tRegular, int tSenior, Person person,int id) {
 		this.person = person;
 		this.controller = controller;
 		this.tChild = tChild;
 		this.tRegular = tRegular;
 		this.tYoung = tYoung;
 		this.tSenior = tSenior;
+		this.id = id;
 
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +108,7 @@ public class RideBook extends JFrame {
 		}
 
 		btnNewButton = new JButton("Return");
-		btnNewButton.setBounds(50, 490, 150, 40);
+		btnNewButton.setBounds(50, 495, 150, 40);
 		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.addActionListener(new RideBookListener());
@@ -112,7 +117,7 @@ public class RideBook extends JFrame {
 		btnNewButton_1 = new JButton("Book Now");
 		btnNewButton_1.setFocusPainted(false);
 		btnNewButton_1.setBackground(new Color(245, 245, 245));
-		btnNewButton_1.setBounds(210, 490, 150, 40);
+		btnNewButton_1.setBounds(210, 495, 150, 40);
 		btnNewButton_1.addActionListener(new RideBookListener());
 		contentPane.add(btnNewButton_1);
 
@@ -160,6 +165,11 @@ public class RideBook extends JFrame {
 		totaltxt = new JLabel("Total");
 		totaltxt.setBounds(50, 438, 125, 16);
 		contentPane.add(totaltxt);
+
+		totalGuesttxt = new JLabel("Total for Guest");
+		totalGuesttxt.setBounds(50, 465, 125, 16);
+		if(id==2)
+		contentPane.add(totalGuesttxt);
 		
 		normalnumbertxt = new JLabel("0");
 		normalnumbertxt.setBounds(200, 298, 61, 16);
@@ -180,6 +190,11 @@ public class RideBook extends JFrame {
 		totalnumbertxt = new JLabel("0");
 		totalnumbertxt.setBounds(200, 438, 61, 16);
 		contentPane.add(totalnumbertxt);
+
+		totalGuestnumbertxt = new JLabel("0");
+		totalGuestnumbertxt.setBounds(200, 465, 61, 16);
+		if(id==2)
+		contentPane.add(totalGuestnumbertxt);
 		
 		pricenormaltxt = new JLabel("0 €");
 		pricenormaltxt.setBounds(312, 298, 61, 16);
@@ -201,6 +216,11 @@ public class RideBook extends JFrame {
 		totalpricetxt.setBounds(312, 438, 61, 16);
 		contentPane.add(totalpricetxt);
 
+		totalGuestpricetxt = new JLabel("0 €");
+		totalGuestpricetxt.setBounds(312, 465, 61, 16);
+		if(id==2)
+		contentPane.add(totalGuestpricetxt);
+
 		normalnumbertxt.setText(String.valueOf(tRegular));
 		childnumbertxt.setText(String.valueOf(tChild));
 		youngnumbertxt.setText(String.valueOf(tYoung));
@@ -212,6 +232,7 @@ public class RideBook extends JFrame {
 		ttTickets+= Integer.valueOf(childnumbertxt.getText());
 
 		totalnumbertxt.setText(String.valueOf(ttTickets));
+		totalGuestnumbertxt.setText(String.valueOf(ttTickets));
 
 		setUndecorated(true);
 		setLocationRelativeTo(null);
@@ -247,8 +268,13 @@ public class RideBook extends JFrame {
 					priceTotal += rideAgenda.getPrice() * tChild * 0.7;
 					priceTotal += rideAgenda.getPrice() * tSenior * 0.9;
 					priceTotal += rideAgenda.getPrice() * tYoung * 0.85;
-
 					totalpricetxt.setText(priceTotal +" €");
+
+					if(id==2){
+						double priceTotalGuest = rideAgenda.getPrice()*Double.parseDouble(totalnumbertxt.getText());
+						totalGuestpricetxt.setText(priceTotalGuest + " €");
+
+					}
 				}
 
 
