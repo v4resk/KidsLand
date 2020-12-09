@@ -376,9 +376,6 @@ public String getPasswdFor(String user){
         return isEmployee;
  }
 
- public boolean canIBook(){
-        return true;
- }
 //-----------------------------------------------------------------------------------------------------
 
 }
