@@ -282,7 +282,7 @@ public class ModelSQL {
     public void db_updateNbrPlaceInBook(String rideName,java.sql.Date date,int nbrOfTickets){
 
         try {
-
+            // Si l'attraction existe
             String queryNbrOfTickets = "SELECT placeNbrUsed FROM Time "+
                     "WHERE name="+"'"+rideName+"'"
                     +"AND date_m="+"'"+date+"'";
@@ -290,10 +290,17 @@ public class ModelSQL {
             if(res.next())
             nbrOfTickets+=res.getInt(1);
 
+            // On incremente le nombre de place prise
             String query = "UPDATE Time SET placeNbrUsed="+"'"+nbrOfTickets+"'"+
                     "WHERE name="+"'"+rideName+"'"
                     +"AND date_m="+"'"+date+"'";
             stmt.executeUpdate(query);
+
+            // On incrémente aussi le nbr de place dans Agenda
+            for(int i=0; i<agenda.get(date).size(); i++){
+                if(agenda.get(date).get(i).getRide().getName().equals(rideName))
+                    agenda.get(date).get(i).setPlaceNbrUsed(nbrOfTickets+agenda.get(date).get(i).getPlaceNbrUsed());
+            }
         }catch (SQLException e) {
             System.out.println("SQLException: " + e.getMessage());
             System.out.println("SQLState: " + e.getSQLState());
@@ -367,6 +374,10 @@ public String getPasswdFor(String user){
 
         }
         return isEmployee;
+ }
+
+ public boolean canIBook(){
+        return true;
  }
 //-----------------------------------------------------------------------------------------------------
 

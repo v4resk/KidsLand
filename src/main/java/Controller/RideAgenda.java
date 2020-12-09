@@ -22,6 +22,10 @@ public class RideAgenda {
         return price;
     }
 
+    public void setPlaceNbrUsed(int placeNbrUsed) {
+        this.placeNbrUsed = placeNbrUsed;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }

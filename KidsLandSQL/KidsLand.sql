@@ -53,7 +53,8 @@ INSERT INTO Person(name,firstName,date_naissance,email,mdp,employBool) VALUES
 ('Carole', 'yodja ', '1969-03-25', 'carole.yodja@free.fr','loveyoga09',false),
 ('Alexandre', 'Lacren ', '2005-09-19', 'alex.lacren@gmail.com','lacrem01',false),
 ('Theo', 'pirto ', '1998-01-20', 'theo.pirto@outlook.fr','pinkcat3',false),
-('Shelly', 'colt ', '1980-02-12', 'Shelly.colt@free.fr','lovebrawlstar3',true);
+('Shelly', 'colt ', '1980-02-12', 'Shelly.colt@free.fr','lovebrawlstar3',true),
+('Guest' , 'Guest' , '2000-10-10', 'Guest' , 'Guest' ,false);
 
 INSERT INTO Ride(name,placeNbr,price) VALUES
 ('TowerOfLove',100,8),

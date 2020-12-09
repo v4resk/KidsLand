@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Guest extends Person {
 
 public Guest(){
-    super(null,null,null,null);
+    super(null,null,null,"Guest");
 }
 
     @Override

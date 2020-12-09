@@ -6,13 +6,12 @@ import java.awt.Color;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-
 import java.util.ArrayList;
 import java.util.*;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,30 +21,38 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import Controller.*;
-
-
-
 import javax.swing.JList;
 import java.awt.Font;
-
 
 public class RideBook extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel_6;
-	private JList <String> list;
+	private JList<String> list;
 	private ArrayList<RideAgenda> ridelist;
 	private Controller controller;
 
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private int tChild = 0;
+	private int tYoung = 0;
+	private int tRegular = 0;
+	private int tSenior = 0;
+	private java.sql.Date sqlDate;
+	private Person person;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public RideBook(Controller controller, java.util.Date date) {
-		this.controller=controller;
+	public RideBook(Controller controller, java.util.Date date, int tChild, int tYoung, int tRegular, int tSenior, Person person) {
+		this.person = person;
+		this.controller = controller;
+		this.tChild = tChild;
+		this.tRegular = tRegular;
+		this.tYoung = tYoung;
+		this.tSenior = tSenior;
+
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 400, 550);
@@ -57,34 +64,46 @@ public class RideBook extends JFrame {
 
 		// Show available ride
 		String pattern = "yyyy-MM-dd";
-		DateFormat dFormat= new SimpleDateFormat(pattern);
+		DateFormat dFormat = new SimpleDateFormat(pattern);
 		String strDate = dFormat.format(date);
 		System.out.println(strDate);
 		ridelist = controller.getAgenda().get(Date.valueOf(strDate));
+		sqlDate = Date.valueOf(strDate);
+
 
 		int size = ridelist.size();
-		String [] tableau = new String [size];
-		for(int i=0;i<size;i++)
-		{
-			tableau[i]=ridelist.get(i).getRide().getName();
+		String[] tableau = new String[size];
+		for (int i = 0; i < size; i++) {
+			tableau[i] = ridelist.get(i).getRide().getName();
 		}
-		
+
 		btnNewButton = new JButton("Return");
 		btnNewButton.setBounds(50, 490, 150, 40);
 		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.addActionListener(new RideBookListener());
 		contentPane.add(btnNewButton);
-		
+
 		btnNewButton_1 = new JButton("Book Now");
 		btnNewButton_1.setFocusPainted(false);
 		btnNewButton_1.setBackground(new Color(245, 245, 245));
+<<<<<<< HEAD
 		btnNewButton_1.setBounds(200, 490, 150, 40);
 		contentPane.add(btnNewButton_1);
 		
 		list= new JList<String>(/*tableau*/);
 		list.setBackground(new Color(224,255,255));;
 		list.setBounds(6, 6, 388, 250);
+=======
+		btnNewButton_1.setBounds(183, 209, 125, 29);
+		btnNewButton_1.addActionListener(new RideBookListener());
+		contentPane.add(btnNewButton_1);
+
+		list = new JList<String>(tableau);
+		list.setBackground(new Color(224, 255, 255));
+		;
+		list.setBounds(0, 0, 349, 273);
+>>>>>>> caa8230ff3b2ef549a507d674c4e97264f504b17
 		contentPane.add(list);
 		
 		JLabel tickettxt = new JLabel("Ticket");
@@ -169,23 +188,58 @@ public class RideBook extends JFrame {
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
+
 
 	}
-	private class RideBookListener	implements ActionListener {
-		
-		
-		public void actionPerformed (ActionEvent e)
-		{
-			if(e.getSource()==btnNewButton)
-			{
+
+	private class RideBookListener implements ActionListener {
+
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnNewButton) {
 				dispose();
 			}
-			
-			if(e.getSource()==btnNewButton_1)
-			{
-				
+			if (e.getSource() == btnNewButton_1) {
+
+				String rideTxt = list.getSelectedValue();
+				RideAgenda rideAgenda = null;
+				for (int i = 0; i < controller.getAgenda().get(sqlDate).size(); i++) {
+					if (controller.getAgenda().get(sqlDate).get(i).getRide().getName().equals(rideTxt))
+						rideAgenda = controller.getAgenda().get(sqlDate).get(i);
+				}
+
+
+				if (controller.canIBook(tChild + tRegular + tYoung + tSenior, sqlDate, rideAgenda)) {
+					if (tChild > 0) {
+						if (person.bookARide(sqlDate, rideAgenda, tChild, "Child")) ;
+						System.out.println("ChildBooked");
+
+					}
+					if (tSenior > 0) {
+						person.bookARide(sqlDate, rideAgenda, tSenior, "Senior");
+						System.out.println("SeniorBooked");
+					}
+					if (tYoung > 0) {
+						person.bookARide(sqlDate, rideAgenda, tYoung, "Young");
+						System.out.println("YoungBooked");
+					}
+					if (tRegular > 0) {
+						person.bookARide(sqlDate, rideAgenda, tRegular, "Normal");
+						System.out.println("NormalBooked");
+					}
+				} else
+					JOptionPane.showMessageDialog(null, "Not enough place to book");
+
+
+				if (e.getSource() == btnNewButton_1) {
+
+				}
 			}
 		}
+
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> caa8230ff3b2ef549a507d674c4e97264f504b17
