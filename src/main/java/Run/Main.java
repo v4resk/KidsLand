@@ -6,15 +6,11 @@ package Run;
 
 
 import Controller.*;
-
 import Controller.Ride;
 import Model.ModelSQL;
 import Controller.Person;
 import Controller.RideAgenda;
 import View.Login;
-import View.TimeEvaluator;
-import com.toedter.calendar.JCalendar;
-import java.util.Calendar;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -28,8 +24,6 @@ public class Main {
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
         final String passwd = "Alex08";
         final String user = "alex";
-
-
 
 
         try {

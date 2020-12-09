@@ -3,7 +3,6 @@ package View;
 
 
 import java.awt.Color;
-import java.awt.Color;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +26,7 @@ import Controller.*;
 
 
 import javax.swing.JList;
+import java.awt.Font;
 
 
 public class RideBook extends JFrame {
@@ -48,7 +48,7 @@ public class RideBook extends JFrame {
 		this.controller=controller;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 200, 349, 273);
+		setBounds(200, 200, 400, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new LineBorder(UIManager.getColor("textHighlight"), 2));
@@ -70,7 +70,7 @@ public class RideBook extends JFrame {
 		}
 		
 		btnNewButton = new JButton("Return");
-		btnNewButton.setBounds(46, 209, 125, 29);
+		btnNewButton.setBounds(50, 490, 150, 40);
 		btnNewButton.setBackground(new Color(245, 245, 245));
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.addActionListener(new RideBookListener());
@@ -79,18 +79,93 @@ public class RideBook extends JFrame {
 		btnNewButton_1 = new JButton("Book Now");
 		btnNewButton_1.setFocusPainted(false);
 		btnNewButton_1.setBackground(new Color(245, 245, 245));
-		btnNewButton_1.setBounds(183, 209, 125, 29);
+		btnNewButton_1.setBounds(200, 490, 150, 40);
 		contentPane.add(btnNewButton_1);
 		
-		list= new JList<String>(tableau);
+		list= new JList<String>(/*tableau*/);
 		list.setBackground(new Color(224,255,255));;
-		list.setBounds(0, 0, 349, 273);
+		list.setBounds(6, 6, 388, 250);
 		contentPane.add(list);
-		/*lblNewLabel_6 = new JLabel("");
-		Image img3 = new ImageIcon(this.getClass().getResource("/CloudLogin.png")).getImage();
-		lblNewLabel_6.setIcon(new ImageIcon(img3));
-		lblNewLabel_6.setBounds(-35, 2, 735, 398);
-		contentPane.add(lblNewLabel_6);*/
+		
+		JLabel tickettxt = new JLabel("Ticket");
+		tickettxt.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		tickettxt.setBounds(52, 270, 60, 16);
+		contentPane.add(tickettxt);
+		
+		JLabel numbertxt = new JLabel("Number");
+		numbertxt.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		numbertxt.setBounds(200, 270, 61, 16);
+		contentPane.add(numbertxt);
+		
+		JLabel pricetxt = new JLabel("Price");
+		pricetxt.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
+		pricetxt.setBounds(312, 270, 51, 16);
+		contentPane.add(pricetxt);
+		
+		JLabel normaltxt = new JLabel("Normal (No Reduce)");
+		normaltxt.setBounds(50, 298, 138, 16);
+		contentPane.add(normaltxt);
+		
+		JLabel childtxt = new JLabel("Child (-30%)");
+		childtxt.setBounds(50, 326, 125, 16);
+		contentPane.add(childtxt);
+		
+		JLabel youngtxt = new JLabel("Young (-15%)");
+		youngtxt.setBounds(50, 354, 125, 16);
+		contentPane.add(youngtxt);
+		
+		JLabel seniortxt = new JLabel("Senior (-10%)");
+		seniortxt.setBounds(50, 382, 125, 16);
+		contentPane.add(seniortxt);
+		
+		JLabel linetxt = new JLabel("--------------------------------------");
+		linetxt.setBounds(50, 410, 313, 16);
+		contentPane.add(linetxt);
+		
+		JLabel totaltxt = new JLabel("Total");
+		totaltxt.setBounds(50, 438, 125, 16);
+		contentPane.add(totaltxt);
+		
+		JLabel normalnumbertxt = new JLabel("0");
+		normalnumbertxt.setBounds(200, 298, 61, 16);
+		contentPane.add(normalnumbertxt);
+		
+		JLabel childnumbertxt = new JLabel("0");
+		childnumbertxt.setBounds(200, 326, 61, 16);
+		contentPane.add(childnumbertxt);
+		
+		JLabel youngnumbertxt = new JLabel("0");
+		youngnumbertxt.setBounds(200, 354, 61, 16);
+		contentPane.add(youngnumbertxt);
+		
+		JLabel seniornumbertxt = new JLabel("0");
+		seniornumbertxt.setBounds(200, 382, 61, 16);
+		contentPane.add(seniornumbertxt);
+		
+		JLabel totalnumbertxt = new JLabel("0");
+		totalnumbertxt.setBounds(200, 438, 61, 16);
+		contentPane.add(totalnumbertxt);
+		
+		JLabel pricenormaltxt = new JLabel("0 €");
+		pricenormaltxt.setBounds(312, 298, 61, 16);
+		contentPane.add(pricenormaltxt);
+		
+		JLabel pricechildtxt = new JLabel("0 €");
+		pricechildtxt.setBounds(312, 326, 61, 16);
+		contentPane.add(pricechildtxt);
+		
+		JLabel priceyoungtxt = new JLabel("0 €");
+		priceyoungtxt.setBounds(312, 354, 61, 16);
+		contentPane.add(priceyoungtxt);
+		
+		JLabel priceseniortxt = new JLabel("0 €");
+		priceseniortxt.setBounds(312, 382, 61, 16);
+		contentPane.add(priceseniortxt);
+		
+		JLabel totalpricetxt = new JLabel("0 €");
+		totalpricetxt.setBounds(312, 438, 61, 16);
+		contentPane.add(totalpricetxt);
+
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -113,5 +188,4 @@ public class RideBook extends JFrame {
 			}
 		}
 	}
-	
 }

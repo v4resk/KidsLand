@@ -2,19 +2,10 @@ package View;
 
 import Controller.*;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-import java.awt.Component;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -31,7 +22,6 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JTextField textField_2;
 	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
 

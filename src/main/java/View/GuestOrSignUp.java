@@ -2,9 +2,8 @@ package View;
 
 import Controller.*;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -27,7 +26,6 @@ public class GuestOrSignUp extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnNewButton_2;
 	private JLabel lblNewLabel_2;
-	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel;
 	private Controller controller;
 	

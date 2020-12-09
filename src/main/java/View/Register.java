@@ -2,16 +2,14 @@ package View;
 
 import Controller.*;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class Register extends JFrame {

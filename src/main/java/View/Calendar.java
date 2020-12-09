@@ -3,7 +3,7 @@ package View;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.lang.Object;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,12 +14,10 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.JSlider;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.MenuListener;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.awt.Component;
 import java.awt.Cursor;
 import javax.swing.DebugGraphics;
@@ -32,10 +30,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JDayChooser;
+
 
 import Controller.*;
 
