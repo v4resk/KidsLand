@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.naming.ldap.StartTlsResponse;
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +24,7 @@ import Controller.RideAgenda;
 
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -55,6 +57,7 @@ public class EmployeeDesign extends JFrame {
 	private JTextField capacitytxt;
 	private JTextField pricetxt;
 	private JLabel title1;
+	private JDialog testGraph;
 
 
 
@@ -246,12 +249,33 @@ public class EmployeeDesign extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		
+
+		
 	
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
 	}
+	
+	private class ShowRatioHommeFemmeAction extends AbstractAction {
+		
+
+		
+
+		public void actionPerformed(ActionEvent e) {
+			testGraph = new JDialog();
+			testGraph.setTitle("Rides");
+
+			
+			final DefaultPieDataset pieDataset = new DefaultPieDataset();
+			
+
+		
+			
+		}
+	}
+			
 	
 	private class EmployeeDesignListener implements ActionListener{
 
