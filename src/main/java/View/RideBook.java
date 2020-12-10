@@ -66,6 +66,7 @@ public class RideBook extends JFrame {
 	private RideAgenda rideAgenda;
 	private  double priceTotal;
 	private int id;
+	private double priceTotalGuest;
 
 
 	/**
@@ -239,6 +240,8 @@ public class RideBook extends JFrame {
 	}
 	private class ListListener implements ListSelectionListener{
 
+		
+
 		public void valueChanged(ListSelectionEvent listSelectionEvent) {
 
 
@@ -267,7 +270,7 @@ public class RideBook extends JFrame {
 					totalpricetxt.setText(priceTotal +" €");
 
 					if(id==2){
-						double priceTotalGuest = rideAgenda.getPrice()*Double.parseDouble(totalnumbertxt.getText());
+						priceTotalGuest = rideAgenda.getPrice()*Double.parseDouble(totalnumbertxt.getText());
 						totalGuestpricetxt.setText(priceTotalGuest + " €");
 
 					}
@@ -317,7 +320,12 @@ public class RideBook extends JFrame {
 					}
 					
 					dispose();
-					new BillRide(priceTotal);
+					if(id==2) {
+					new BillRide(priceTotalGuest);}
+					if(id==1) {
+						new BillRide(priceTotal);
+					}
+					
 					
 					
 				} else
