@@ -11,10 +11,7 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.*;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -242,7 +239,6 @@ public class RideBook extends JFrame {
 	}
 	private class ListListener implements ListSelectionListener{
 
-		@Override
 		public void valueChanged(ListSelectionEvent listSelectionEvent) {
 
 
@@ -319,13 +315,16 @@ public class RideBook extends JFrame {
 						person.bookARide(sqlDate, rideAgenda, tRegular, "Normal");
 						System.out.println("NormalBooked");
 					}
+					
+					dispose();
+					new BillRide(priceTotal);
+					
+					
 				} else
 					JOptionPane.showMessageDialog(null, "Not enough place to book");
 
 
-				if (e.getSource() == btnNewButton_1) {
-
-				}
+			
 			}
 		}
 
