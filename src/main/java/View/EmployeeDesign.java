@@ -36,6 +36,7 @@ public class EmployeeDesign extends JFrame {
 	private JPanel agendapanel;
 	private JPanel ridepanel;
 	private JList <String> list;
+	private JList<String> listRide;
 	private ArrayList<Person> personList;
 	private JList <String> list1;
 	private ArrayList <Ride> rideList;
@@ -46,7 +47,8 @@ public class EmployeeDesign extends JFrame {
 	private JTextField capacitytxt;
 	private JTextField pricetxt;
 	private JButton removeuser;
-	private DefaultListModel<String> model;
+	private DefaultListModel<String> modelUser;
+	private DefaultListModel<String> modelRide;
 	private JLabel title1;
 
 
@@ -68,17 +70,19 @@ public class EmployeeDesign extends JFrame {
 		
 		int size = personList.size();
 		String[] tableau = new String[size];
-		model = new DefaultListModel();
+		modelUser = new DefaultListModel();
 		for (int i = 0; i < size; i++) {
 			if(!personList.get(i).getEmail().equals("Guest"))
 			tableau[i] = personList.get(i).getEmail();
-			model.addElement(tableau[i]);
+			modelUser.addElement(tableau[i]);
 		}
 		
 		int size1 = rideList.size();
 		String[] tableauRide = new String[size];
+		modelRide = new DefaultListModel();
 		for (int i = 0; i < size1; i++) {
 			tableauRide[i] = rideList.get(i).getName();
+			modelRide.addElement(tableauRide[i]);
 		}
 		
 		
@@ -223,9 +227,11 @@ public class EmployeeDesign extends JFrame {
 		lblNewLabel_3_2.setBounds(50, 258, 150, 20);
 		ridepanel.add(lblNewLabel_3_2);
 
-
+		listRide = new JList<>(tableauRide);
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(291, 75, 183, 259);
+		scrollPane1.setViewportView(listRide);
+		listRide.setLayoutOrientation(JList.VERTICAL);
 		ridepanel.add(scrollPane1);
 		
 
@@ -243,9 +249,7 @@ public class EmployeeDesign extends JFrame {
 		lblNewLabel_1.setFont(new Font("Skia", Font.BOLD, 19));
 		lblNewLabel_1.setBounds(214, 78, 234, 105);
 		contentPane.add(lblNewLabel_1);
-		
-		
-	
+
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -258,10 +262,9 @@ public class EmployeeDesign extends JFrame {
 			if(actionEvent.getSource()==removeuser){
 				controller.db_DeleteMember(list.getSelectedValue());
 
-
 				int index = list.getSelectedIndex();
-				model.removeElementAt(index);
-				list.setModel(model);
+				modelUser.removeElementAt(index);
+				list.setModel(modelUser);
 
 			}
 		}
@@ -272,8 +275,18 @@ public class EmployeeDesign extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			if(actionEvent.getSource() == removeBtn){
+				controller.db_DeleteRide(listRide.getSelectedValue());
 
+				int index = listRide.getSelectedIndex();
+				modelRide.removeElementAt(index);
+				listRide.setModel(modelRide);
 			}else if(actionEvent.getSource() == addBtn){
+				if(!(nametxt.getText().isEmpty() || pricetxt.getText().isEmpty() || capacitytxt.getText().isEmpty())){
+					controller.db_addRide(nametxt.getText(),Integer.parseInt(capacitytxt.getText()),Double.parseDouble(pricetxt.getText()));
+					modelRide.addElement(nametxt.getText());
+					listRide.setModel(modelRide);
+				}else
+					JOptionPane.showMessageDialog(null,"All fields need to be fill","ERROR",JOptionPane.ERROR_MESSAGE);
 
 			}
 		}
@@ -298,10 +311,10 @@ public class EmployeeDesign extends JFrame {
 			if(e.getSource()==agendaGestionBtn)
 			{
 				
-				//memberpanel.setVisible(false);
+				memberpanel.setVisible(false);
 				agendapanel.setVisible(true);
 				ridepanel.setVisible(false);
-				//statpanel.setVisible(false);
+				statpanel.setVisible(false);
 				
 			}
 			
