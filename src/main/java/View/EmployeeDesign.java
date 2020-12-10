@@ -8,12 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.naming.ldap.StartTlsResponse;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import Controller.Controller;
@@ -21,10 +16,6 @@ import Controller.Person;
 import Controller.RideAgenda;
 
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 public class EmployeeDesign extends JFrame {
 
@@ -45,13 +36,14 @@ public class EmployeeDesign extends JFrame {
 	private JPanel ridepanel;
 	private JList <String> list;
 	private ArrayList<Person> personList;
-	private JLabel Title;
+	private JLabel title;
 	private JButton addBtn;
 	private JButton removeBtn;
 	private JTextField nametxt;
 	private JTextField capacitytxt;
 	private JTextField pricetxt;
-
+	private JButton removeuser;
+	private DefaultListModel<String> model;
 
 
 	public EmployeeDesign(String email, Controller controller) {
@@ -70,9 +62,11 @@ public class EmployeeDesign extends JFrame {
 		
 		int size = personList.size();
 		String[] tableau = new String[size];
+		model = new DefaultListModel();
 		for (int i = 0; i < size; i++) {
 			if(!personList.get(i).getEmail().equals("Guest"))
 			tableau[i] = personList.get(i).getEmail();
+			model.addElement(tableau[i]);
 		}
 		
 		
@@ -130,9 +124,10 @@ public class EmployeeDesign extends JFrame {
 		list.setLayoutOrientation(JList.VERTICAL);
 		memberpanel.add(scrollPane);
 		
-		JButton removeuser = new JButton("Remove this user");
+		removeuser = new JButton("Remove this user");
 		removeuser.setBounds(310, 186, 150, 29);
 		memberpanel.add(removeuser);
+		removeuser.addActionListener(new EmployeeUserManaList());
 		
 		
 		//---------------Stat Panel-----------------------------------------------
@@ -156,18 +151,20 @@ public class EmployeeDesign extends JFrame {
 		contentPane.add(ridepanel);
 		ridepanel.setLayout(null);
 		
-		Title = new JLabel("Ride Management");
-		Title.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		Title.setBounds(175, 26, 148, 25);
-		ridepanel.add(Title);
+		title = new JLabel("Ride Management");
+		title.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		title.setBounds(175, 26, 148, 25);
+		ridepanel.add(title);
 		
 		addBtn = new JButton("Add new ride");
 		addBtn.setBounds(50, 343, 150, 29);
 		ridepanel.add(addBtn);
+		addBtn.addActionListener(new EmployeeRideManaList());
 		
 		removeBtn = new JButton("Remove this ride");
 		removeBtn.setBounds(311, 343, 150, 29);
 		ridepanel.add(removeBtn);
+		removeBtn.addActionListener(new EmployeeRideManaList());
 		
 		nametxt = new JTextField();
 		nametxt.setBounds(50, 120, 170, 30);
@@ -195,7 +192,8 @@ public class EmployeeDesign extends JFrame {
 		JLabel lblNewLabel_3_2 = new JLabel("Price of the new ride");
 		lblNewLabel_3_2.setBounds(50, 258, 150, 20);
 		ridepanel.add(lblNewLabel_3_2);
-		
+
+
 		JScrollPane scrollPane1 = new JScrollPane();
 		scrollPane1.setBounds(291, 75, 183, 259);
 		ridepanel.add(scrollPane1);
@@ -219,6 +217,33 @@ public class EmployeeDesign extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
+	}
+	private class EmployeeUserManaList implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+			if(actionEvent.getSource()==removeuser){
+				controller.db_DeleteMember(list.getSelectedValue());
+
+
+				int index = list.getSelectedIndex();
+				model.removeElementAt(index);
+				list.setModel(model);
+
+			}
+		}
+	}
+
+	private class EmployeeRideManaList implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+			if(actionEvent.getSource() == removeBtn){
+
+			}else if(actionEvent.getSource() == addBtn){
+
+			}
+		}
 	}
 	
 	private class EmployeeDesignListener implements ActionListener{

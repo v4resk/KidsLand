@@ -108,6 +108,7 @@ public class ModelSQL {
     }
 
     public void db_DeleteMember(String email){
+        // Delet in persone List;
         for(int i=0; i<personList.size();i++){
             if(email.equals(personList.get(i).getEmail())){
                 personList.remove(i);
