@@ -138,10 +138,11 @@ public class Login extends JFrame {
 				if(controller.signIn_check(textField_2.getText(),String.valueOf(textField_1.getPassword()))) {
 				if (controller.isAnEmployee(textField_2.getText()))
 				{
-					JOptionPane.showMessageDialog(null,"LogIn as Employee");
+					dispose();
+					new EmployeeDesign(textField_2.getText(),controller);
 					Person employee = controller.getPerson(textField_2.getText());
 					employee.setController(controller);
-					new Calendar(employee,3);
+					//new Calendar(employee,3);
 				}
 				else {
 					JOptionPane.showMessageDialog(null,"LogIn as Member");
