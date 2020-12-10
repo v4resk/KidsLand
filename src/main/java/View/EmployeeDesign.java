@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 
 import Controller.Controller;
 import Controller.Person;
+import Controller.Ride;
 import Controller.RideAgenda;
 
 import java.awt.Font;
@@ -36,6 +37,8 @@ public class EmployeeDesign extends JFrame {
 	private JPanel ridepanel;
 	private JList <String> list;
 	private ArrayList<Person> personList;
+	private JList <String> list1;
+	private ArrayList <Ride> rideList;
 	private JLabel title;
 	private JButton addBtn;
 	private JButton removeBtn;
@@ -44,12 +47,15 @@ public class EmployeeDesign extends JFrame {
 	private JTextField pricetxt;
 	private JButton removeuser;
 	private DefaultListModel<String> model;
+	private JLabel title1;
+
 
 
 	public EmployeeDesign(String email, Controller controller) {
 		this.email=email;
 		this.controller=controller;
 		personList=controller.getPersonList();
+		rideList=controller.getRideList();
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
@@ -68,6 +74,16 @@ public class EmployeeDesign extends JFrame {
 			tableau[i] = personList.get(i).getEmail();
 			model.addElement(tableau[i]);
 		}
+		
+		int size1 = rideList.size();
+		String[] tableauRide = new String[size];
+		for (int i = 0; i < size1; i++) {
+			tableauRide[i] = rideList.get(i).getName();
+		}
+		
+		
+
+		
 		
 		
 		JPanel panel = new JPanel();
@@ -143,12 +159,26 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.setBounds(201, 2, 498, 396);
 		contentPane.add(agendapanel);
 		agendapanel.setVisible(false);
+		agendapanel.setLayout(null);
+		
+		list1= new JList<String>(tableauRide);
+		list1.setBounds(188, 69, 153, 153);
+		agendapanel.add(list1);
+		
+		title1 = new JLabel("Agenda Management");
+		title1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		title1.setBounds(171, 5, 165, 20);
+		agendapanel.add(title1);
+		
+		
+		
 		
 		//---------------Ride Panel------------------------------------------------
 		
 		ridepanel = new JPanel();
 		ridepanel.setBounds(201, 2, 498, 396);
 		contentPane.add(ridepanel);
+		ridepanel.setVisible(false);
 		ridepanel.setLayout(null);
 		
 		title = new JLabel("Ride Management");
@@ -198,21 +228,24 @@ public class EmployeeDesign extends JFrame {
 		scrollPane1.setBounds(291, 75, 183, 259);
 		ridepanel.add(scrollPane1);
 		
+
+		
 		
 		
 		//---------------Panel Welcome(Content Panel)---------------------------------------------
+		
+		lblNewLabel_2 = new JLabel("Welcome  " + this.email);
+		lblNewLabel_2.setFont(new Font("Skia", Font.BOLD | Font.ITALIC, 19));
+		lblNewLabel_2.setBounds(214, 6, 412, 105);
+		contentPane.add(lblNewLabel_2);
 		
 		lblNewLabel_1 = new JLabel("Loged in as employee");
 		lblNewLabel_1.setFont(new Font("Skia", Font.BOLD, 19));
 		lblNewLabel_1.setBounds(214, 78, 234, 105);
 		contentPane.add(lblNewLabel_1);
 		
-		lblNewLabel_2 = new JLabel("Welcome  " + this.email);
-		lblNewLabel_2.setFont(new Font("Skia", Font.BOLD | Font.ITALIC, 19));
-		lblNewLabel_2.setBounds(214, 6, 412, 105);
-		contentPane.add(lblNewLabel_2);
-		ridepanel.setVisible(false);
 		
+	
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -265,10 +298,10 @@ public class EmployeeDesign extends JFrame {
 			if(e.getSource()==agendaGestionBtn)
 			{
 				
-				memberpanel.setVisible(false);
+				//memberpanel.setVisible(false);
 				agendapanel.setVisible(true);
 				ridepanel.setVisible(false);
-				statpanel.setVisible(false);
+				//statpanel.setVisible(false);
 				
 			}
 			
