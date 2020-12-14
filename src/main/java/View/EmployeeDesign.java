@@ -205,15 +205,9 @@ public class EmployeeDesign extends JFrame {
 		
 
 		statpanel.removeAll();
-<<<<<<< HEAD
 		statpanel.add(createPieChart("Rides Statistics",rideList));
 		this.setLocationRelativeTo(null);
-		
-=======
-		statpanel.add(createPieChart("yes"));
-		this.setLocationRelativeTo(null);
-	
->>>>>>> 3d53c1f43ccb021dcc0766f081e5f0cecfcfc38d
+
 		
 		//---------------Agenda Panel---------------------------------------------
 
@@ -223,10 +217,7 @@ public class EmployeeDesign extends JFrame {
 		contentPane.add(agendapanel);
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
-<<<<<<< HEAD
-		
-		
-=======
+
 
 		dateChooser = new JDateChooser();
 		dateChooser.setBounds(6, 62, 165, 26);
@@ -238,7 +229,7 @@ public class EmployeeDesign extends JFrame {
 
 
 		// List of rides who can be book
->>>>>>> 3d53c1f43ccb021dcc0766f081e5f0cecfcfc38d
+
 		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(261, 89, 211, 191);
