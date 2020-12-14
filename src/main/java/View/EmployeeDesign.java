@@ -1,6 +1,8 @@
 package View;
 
 import java.awt.Color;
+
+
 import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,7 @@ import java.lang.reflect.Field;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.naming.ldap.StartTlsResponse;
@@ -18,6 +21,15 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.AncestorListener;
 import javax.swing.event.DocumentEvent;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
 
 import Controller.Controller;
 import Controller.Person;
@@ -27,8 +39,10 @@ import Controller.RideAgenda;
 import java.awt.Font;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
-
-
+import java.awt.BorderLayout;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.HashMap;
 
 
 public class EmployeeDesign extends JFrame {
@@ -71,7 +85,16 @@ public class EmployeeDesign extends JFrame {
 	private JButton addAgendaBtn;
 	private JDateChooser dateChooser;
 	private JDateChooser dateChooser_1;
-
+	private HashMap<Date, ArrayList<RideAgenda>> agenda;
+	private JButton setButtonDeletUpdate;
+	private JButton setButtonAddAgenda;
+	private ArrayList<RideAgenda> ridelistForList;
+	private JButton updateAgendPriceBtn;
+	private JButton removeAgendaBtn;
+	private boolean isListOk;
+	private java.sql.Date sqlDate;
+	private boolean isInRideList;
+	private java.sql.Date sqlDate2;
 
 
 	public EmployeeDesign(String email, Controller controller) {
@@ -79,6 +102,10 @@ public class EmployeeDesign extends JFrame {
 		this.controller=controller;
 		personList=controller.getPersonList();
 		rideList=controller.getRideList();
+		agenda = controller.getAgenda();
+		isListOk = false;
+		isInRideList = false;
+		modelAgendaRide = new DefaultListModel<String>();
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
@@ -87,6 +114,7 @@ public class EmployeeDesign extends JFrame {
 		contentPane.setBorder(new LineBorder(UIManager.getColor("textHighlight"), 2));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
 		
 		
 		int size = personList.size();
@@ -170,17 +198,33 @@ public class EmployeeDesign extends JFrame {
 		//---------------Stat Panel-----------------------------------------------
 		
 		statpanel = new JPanel();
-		statpanel.setBounds(201, 2, 498, 396);
+		statpanel.setBounds(200, 2, 498, 396);
 		contentPane.add(statpanel);
 		statpanel.setVisible(false);
+		statpanel.setLayout(null);
+		
+
+		statpanel.removeAll();
+		statpanel.add(createPieChart("yes"));
+		this.setLocationRelativeTo(null);
+	
 		
 		//---------------Agenda Panel---------------------------------------------
-		
+
+
 		agendapanel = new JPanel();
 		agendapanel.setBounds(201, 2, 498, 396);
 		contentPane.add(agendapanel);
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
+
+		dateChooser = new JDateChooser();
+		dateChooser.setBounds(6, 62, 165, 26);
+		agendapanel.add(dateChooser);
+
+		dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(262, 312, 138, 26);
+		agendapanel.add(dateChooser_1);
 
 
 		// List of rides who can be book
@@ -192,7 +236,24 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(rideListScrollPane);
 
 
+		//----------------------FOR choos a date to update/remove-----------------------------
 		// Select date;
+		TimeEvaluator evaluator = new TimeEvaluator();
+		for (Date i : agenda.keySet()){
+			evaluator.add(i);
+		}
+		// Select the StartDate and EndDate
+		Date minDate = Date.valueOf(LocalDate.now());
+		Date maxDate = Collections.max(agenda.keySet());
+		evaluator.setStartDate(minDate);
+		evaluator.setEndDate(maxDate);
+		dateChooser.getJCalendar().getDayChooser().addDateEvaluator(evaluator);
+		//--------------------------------------------------------------------------------------
+		//---------------------choose a date to add ride----------------------------------------
+		TimeEvaluator_2 evaluator_add = new TimeEvaluator_2();
+		evaluator_add.setStartDate(minDate);
+		dateChooser_1.getJCalendar().getDayChooser().addDateEvaluator(evaluator_add);
+		//--------------------------------------------------------------------------------------
 
 
 		listUpdateRemove = new JList<String>();
@@ -208,23 +269,19 @@ public class EmployeeDesign extends JFrame {
 		title1.setBounds(171, 5, 165, 20);
 		agendapanel.add(title1);
 		
-		dateChooser = new JDateChooser();
-		dateChooser.setBounds(6, 62, 224, 26);
-		agendapanel.add(dateChooser);
-
-
-		
 		JLabel dateridetxt = new JLabel("Choose a date and a ride");
 		dateridetxt.setBounds(7, 42, 165, 16);
 		agendapanel.add(dateridetxt);
 		
-		JButton removeAgendaBtn = new JButton("Delete");
+		removeAgendaBtn = new JButton("Delete");
 		removeAgendaBtn.setBounds(6, 350, 117, 29);
 		agendapanel.add(removeAgendaBtn);
+		removeAgendaBtn.addActionListener(new EmployeeAgendaManaList());
 		
-		JButton updateAgendPriceBtn = new JButton("Update");
+		updateAgendPriceBtn = new JButton("Update");
 		updateAgendPriceBtn.setBounds(113, 350, 117, 29);
 		agendapanel.add(updateAgendPriceBtn);
+		updateAgendPriceBtn.addActionListener(new EmployeeAgendaManaList());
 		
 		textField = new JTextField();
 		textField.setBounds(6, 312, 224, 26);
@@ -238,21 +295,26 @@ public class EmployeeDesign extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Choose a date and a ride");
 		lblNewLabel_3.setBounds(259, 66, 211, 16);
 		agendapanel.add(lblNewLabel_3);
-		
-		dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(262, 312, 211, 26);
-		agendapanel.add(dateChooser_1);
 
-
-		
 		addAgendaBtn = new JButton("Add to agenda");
 		addAgendaBtn.setBounds(284, 350, 165, 29);
 		agendapanel.add(addAgendaBtn);
 		
+		setButtonDeletUpdate = new JButton("Set");
+		setButtonDeletUpdate.setBounds(171, 62, 59, 29);
+		agendapanel.add(setButtonDeletUpdate);
+		setButtonDeletUpdate.addActionListener(new EmployeeAgendaManaList());
+		
+		setButtonAddAgenda = new JButton("Set");
+		setButtonAddAgenda.setBounds(397, 313, 75, 26);
+		agendapanel.add(setButtonAddAgenda);
+		setButtonAddAgenda.addActionListener(new EmployeeAgendaManaList());
 
-		
-		
-		
+
+
+
+
+
 		//---------------Ride Panel------------------------------------------------
 		
 		ridepanel = new JPanel();
@@ -309,7 +371,6 @@ public class EmployeeDesign extends JFrame {
 		scrollPane1.setViewportView(listRide);
 		listRide.setLayoutOrientation(JList.VERTICAL);
 		ridepanel.add(scrollPane1);
-		
 
 		
 		
@@ -331,7 +392,59 @@ public class EmployeeDesign extends JFrame {
 		setVisible(true);
 		
 	}
+	private class EmployeeAgendaManaList implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==setButtonAddAgenda){
+				java.util.Date date = dateChooser_1.getDate();
+				String pattern = "yyyy-MM-dd";
+				DateFormat dFormat = new SimpleDateFormat(pattern);
+				String strDate = dFormat.format(date);
+				sqlDate2 = Date.valueOf(strDate);
+				double prixDefault=0;
+				for(int i=0; i<controller.getRideList().size() ; i++){
+					if(controller.getRideList().get(i).getName().equals(list1.getSelectedValue()))
+						prixDefault = controller.getRideList().get(i).getPrice();
+				}
+				controller.db_addAgenda(list1.getSelectedValue(),sqlDate2,prixDefault);
+				JOptionPane.showMessageDialog(null,"Succes !");
+			}
+			if(e.getSource()==setButtonDeletUpdate){
+				java.util.Date date = dateChooser.getDate();
+				String pattern = "yyyy-MM-dd";
+				DateFormat dFormat = new SimpleDateFormat(pattern);
+				String strDate = dFormat.format(date);
+				ridelistForList = controller.getAgenda().get(Date.valueOf(strDate));
+				sqlDate = Date.valueOf(strDate);
+
+				modelAgendaRide.removeAllElements();
+				for(int i=0 ; i<ridelistForList.size() ; i++){
+					modelAgendaRide.addElement(ridelistForList.get(i).getRide().getName());
+				}
+				listUpdateRemove.setModel(modelAgendaRide);
+				isListOk = true;
+			}
+			if(e.getSource()==removeAgendaBtn){
+				if(isListOk){
+					JOptionPane.showMessageDialog(null,"Done");
+					int index = listUpdateRemove.getSelectedIndex();
+					controller.db_DeleteAgenda(listUpdateRemove.getSelectedValue(),sqlDate);
+					modelAgendaRide.removeElementAt(index);
+				}else
+					JOptionPane.showMessageDialog(null,"Select a date before");
+			}
+			if(e.getSource()==updateAgendPriceBtn){
+				if(isListOk || !textField.getText().isEmpty()){
+					controller.db_UpdateRidePrice(listUpdateRemove.getSelectedValue(),sqlDate,Double.parseDouble(textField.getText()));
+					JOptionPane.showMessageDialog(null,"Updated !");
+				}
+				else{
+					JOptionPane.showMessageDialog(null,"Select a date before and put a price");
+				}
+			}
+		}
+	}
 
 
 	private class EmployeeUserManaList implements ActionListener{
@@ -355,8 +468,8 @@ public class EmployeeDesign extends JFrame {
 	
 		public void actionPerformed(ActionEvent actionEvent) {
 			if(actionEvent.getSource() == removeBtn){
-				controller.db_DeleteRide(listRide.getSelectedValue());
 
+				controller.db_DeleteRide(listRide.getSelectedValue());
 				int index = listRide.getSelectedIndex();
 				modelRide.removeElementAt(index);
 				listRide.setModel(modelRide);
@@ -364,10 +477,19 @@ public class EmployeeDesign extends JFrame {
 
 			}else if(actionEvent.getSource() == addBtn){
 				if(!(nametxt.getText().isEmpty() || pricetxt.getText().isEmpty() || capacitytxt.getText().isEmpty())){
-					controller.db_addRide(nametxt.getText(),Integer.parseInt(capacitytxt.getText()),Double.parseDouble(pricetxt.getText()));
-					modelRide.addElement(nametxt.getText());
-					listRide.setModel(modelRide);
-					list1.setModel(modelRide);
+					for (int i=0; i<controller.getRideList().size(); i++){
+						if(rideList.get(i).getName().equals(nametxt.getText()))
+							isInRideList = true;
+					}
+					if(!isInRideList) {
+						controller.db_addRide(nametxt.getText(), Integer.parseInt(capacitytxt.getText()), Double.parseDouble(pricetxt.getText()));
+						modelRide.addElement(nametxt.getText());
+						listRide.setModel(modelRide);
+						list1.setModel(modelRide);
+					}
+					else{
+						JOptionPane.showMessageDialog(null,"Ride Already exist");
+					}
 				}else
 					JOptionPane.showMessageDialog(null,"All fields need to be fill","ERROR",JOptionPane.ERROR_MESSAGE);
 
@@ -418,6 +540,8 @@ public class EmployeeDesign extends JFrame {
 				agendapanel.setVisible(false);
 				ridepanel.setVisible(false);
 				statpanel.setVisible(true);
+				
+				
 			}
 			
 			if(e.getSource()==returnBtn)
@@ -429,4 +553,37 @@ public class EmployeeDesign extends JFrame {
 		}
 		
 	}
+	
+	 private ChartPanel createPieChart(String chartTitle) {
+	        System.out.println("PieChart");
+	        PieDataset dataset = createDataset();
+	        JFreeChart chart = createChart(dataset, chartTitle);
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        chartPanel.setLocation(200, 100);
+	        chartPanel.setSize(250, 300);
+	        return chartPanel;
+	    }
+
+	    private PieDataset createDataset() {
+	        System.out.println("PieDataset");
+	        DefaultPieDataset result = new DefaultPieDataset();
+	        result.setValue("Linux", 29);
+	        result.setValue("Mac", 20);
+	        result.setValue("Windows", 51);
+	        return result;
+
+	    }
+
+	    private JFreeChart createChart(PieDataset dataset, String title) {
+	        System.out.println("Create Chart");
+	        JFreeChart chart = ChartFactory.createPieChart3D(
+	            title, dataset, true, true, false);
+	        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+	        plot.setStartAngle(290);
+	        plot.setDirection(Rotation.CLOCKWISE);
+	        plot.setForegroundAlpha(0.5f);
+	        plot.setCircular(true);
+	        return chart;
+
+	    }
 }

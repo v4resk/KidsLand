@@ -140,7 +140,10 @@ public class Controller {
     public boolean canIBook(int nbrOfTickets, Date date, RideAgenda ride) {
         return (nbrOfTickets + ride.getPlaceNbrUsed()) <= ride.getRide().getNbrPlace();
     }
-
+    
+    public int getTotalPlaceUsedRide() {
+    	return(mSql.getTotalBookedPlace());
+    }
 
     //----------------------------------------------------------------------------------------
 }
