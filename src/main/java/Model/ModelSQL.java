@@ -383,7 +383,6 @@ public String getPasswdFor(String user){
 
      String query = "SELECT SUM(placeNbrUsed) FROM Time WHERE name =" + "'"+nameRide+"'";
 
-
      try {
     	 
          ResultSet res = stmt.executeQuery(query);
