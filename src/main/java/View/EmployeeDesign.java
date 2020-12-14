@@ -5,11 +5,19 @@ import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.lang.reflect.Field;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.naming.ldap.StartTlsResponse;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.DocumentEvent;
 
 import Controller.Controller;
 import Controller.Person;
@@ -19,6 +27,8 @@ import Controller.RideAgenda;
 import java.awt.Font;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
+
+
 
 
 public class EmployeeDesign extends JFrame {
@@ -52,12 +62,15 @@ public class EmployeeDesign extends JFrame {
 	private JButton removeuser;
 	private DefaultListModel<String> modelUser;
 	private DefaultListModel<String> modelRide;
+	private DefaultListModel<String> modelAgendaRide;
 	private JLabel title1;
 	private JDialog testGraph;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JList<String> listUpdateRemove;
 	private JButton addAgendaBtn;
+	private JDateChooser dateChooser;
+	private JDateChooser dateChooser_1;
 
 
 
@@ -169,7 +182,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
 
-		
+
 		// List of rides who can be book
 		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
@@ -177,6 +190,9 @@ public class EmployeeDesign extends JFrame {
 		rideListScrollPane.setViewportView(list1);
 		list1.setLayoutOrientation(JList.VERTICAL);
 		agendapanel.add(rideListScrollPane);
+
+
+		// Select date;
 
 
 		listUpdateRemove = new JList<String>();
@@ -192,9 +208,11 @@ public class EmployeeDesign extends JFrame {
 		title1.setBounds(171, 5, 165, 20);
 		agendapanel.add(title1);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		dateChooser.setBounds(6, 62, 224, 26);
 		agendapanel.add(dateChooser);
+
+
 		
 		JLabel dateridetxt = new JLabel("Choose a date and a ride");
 		dateridetxt.setBounds(7, 42, 165, 16);
@@ -221,15 +239,11 @@ public class EmployeeDesign extends JFrame {
 		lblNewLabel_3.setBounds(259, 66, 211, 16);
 		agendapanel.add(lblNewLabel_3);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1 = new JDateChooser();
 		dateChooser_1.setBounds(262, 312, 211, 26);
 		agendapanel.add(dateChooser_1);
-		
-		
-		list1= new JList<String>(tableauRide);
-		list1.setBounds(262, 89, 207, 191);
-		agendapanel.add(list1);
-		list1.setLayoutOrientation(JList.VERTICAL);
+
+
 		
 		addAgendaBtn = new JButton("Add to agenda");
 		addAgendaBtn.setBounds(284, 350, 165, 29);
@@ -317,6 +331,9 @@ public class EmployeeDesign extends JFrame {
 		setVisible(true);
 		
 	}
+
+
+
 	private class EmployeeUserManaList implements ActionListener{
 
 		
