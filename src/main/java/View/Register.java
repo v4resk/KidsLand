@@ -1,6 +1,7 @@
 package View;
 
 import Controller.*;
+import com.toedter.calendar.JDateChooser;
 
 
 import java.awt.Color;
@@ -11,6 +12,8 @@ import java.sql.Date;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class Register extends JFrame {
 
@@ -31,6 +34,9 @@ public class Register extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+
+
 	public Register(Controller controller) {
 		this.controller = controller;
 		setBackground(Color.WHITE);
