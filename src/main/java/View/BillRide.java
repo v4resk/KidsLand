@@ -47,7 +47,7 @@ public class BillRide extends JFrame {
 		contentPane.add(message);
 		
 		JLabel lblNewLabel = new JLabel("Total : "+pricetotal+" €");
-		lblNewLabel.setBounds(175, 250, 100, 16);
+		lblNewLabel.setBounds(175, 250, 162, 16);
 		contentPane.add(lblNewLabel);
 		
 		btnNewButton = new JButton("Pay and return ");
