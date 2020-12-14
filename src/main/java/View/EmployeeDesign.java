@@ -57,6 +57,7 @@ public class EmployeeDesign extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JList<String> listUpdateRemove;
+	private JButton addAgendaBtn;
 
 
 
@@ -167,13 +168,12 @@ public class EmployeeDesign extends JFrame {
 		contentPane.add(agendapanel);
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
+
 		
 		// List of rides who can be book
 		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
-		rideListScrollPane.setBounds(262, 54, 211, 103);
-		rideListScrollPane.setViewportView(list1);
-		list1.setLayoutOrientation(JList.VERTICAL);
+		rideListScrollPane.setBounds(261, 89, 211, 191);
 		agendapanel.add(rideListScrollPane);
 		
 
@@ -190,14 +190,14 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(title1);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(6, 54, 224, 26);
+		dateChooser.setBounds(6, 62, 224, 26);
 		agendapanel.add(dateChooser);
 		
 		JLabel dateridetxt = new JLabel("Choose a date and a ride");
-		dateridetxt.setBounds(25, 37, 165, 16);
+		dateridetxt.setBounds(7, 42, 165, 16);
 		agendapanel.add(dateridetxt);
 		
-		JButton removeAgendaBtn = new JButton("Delet");
+		JButton removeAgendaBtn = new JButton("Delete");
 		removeAgendaBtn.setBounds(6, 350, 117, 29);
 		agendapanel.add(removeAgendaBtn);
 		
@@ -214,18 +214,23 @@ public class EmployeeDesign extends JFrame {
 		priceUpdateTxt.setBounds(6, 295, 184, 16);
 		agendapanel.add(priceUpdateTxt);
 		
-
-		
-		
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(262, 195, 130, 26);
-		agendapanel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(262, 169, 61, 16);
+		JLabel lblNewLabel_3 = new JLabel("Choose a date and a ride");
+		lblNewLabel_3.setBounds(259, 66, 211, 16);
 		agendapanel.add(lblNewLabel_3);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(262, 312, 211, 26);
+		agendapanel.add(dateChooser_1);
+		
+		
+		list1= new JList<String>(tableauRide);
+		list1.setBounds(262, 89, 207, 191);
+		agendapanel.add(list1);
+		list1.setLayoutOrientation(JList.VERTICAL);
+		
+		addAgendaBtn = new JButton("Add to agenda");
+		addAgendaBtn.setBounds(284, 350, 165, 29);
+		agendapanel.add(addAgendaBtn);
 		
 
 		
