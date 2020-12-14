@@ -376,6 +376,29 @@ public String getPasswdFor(String user){
         }
         return isEmployee;
  }
+ 
+ 
+ public int getTotalBookedPlace(){
+	 int total = 0;
+     String query = "SELECT SUM(placeNbrUsed) FROM time ";
+
+     try {
+    	 
+         ResultSet res = stmt.executeQuery(query);
+         if(res.next()) {
+         total = res.getInt(1);
+         System.out.println(total);}
+         
+
+     }catch (SQLException e) {
+         System.out.println("SQLException: " + e.getMessage());
+         System.out.println("SQLState: " + e.getSQLState());
+         System.out.println("VendorError: " + e.getErrorCode());
+
+     }
+
+     return total;
+}
 
 //-----------------------------------------------------------------------------------------------------
 

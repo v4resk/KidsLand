@@ -34,6 +34,7 @@ public class Main {
 
             //------------TEST---------------------------------
             
+            controller.getTotalPlaceUsedRide();
             long millis=System.currentTimeMillis();
             java.sql.Date date = Date.valueOf("2020-11-25");
             ArrayList<Ride> listRide= msql.getRideList();
