@@ -174,8 +174,10 @@ public class EmployeeDesign extends JFrame {
 		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(261, 89, 211, 191);
+		rideListScrollPane.setViewportView(list1);
+		list1.setLayoutOrientation(JList.VERTICAL);
 		agendapanel.add(rideListScrollPane);
-		
+
 
 		listUpdateRemove = new JList<String>();
 		JScrollPane updateAndRemoveScrollPane = new JScrollPane();
@@ -183,6 +185,7 @@ public class EmployeeDesign extends JFrame {
 		updateAndRemoveScrollPane.setViewportView(listUpdateRemove);
 		listUpdateRemove.setLayoutOrientation(JList.VERTICAL);
 		agendapanel.add(updateAndRemoveScrollPane);
+
 		
 		title1 = new JLabel("Agenda Management");
 		title1.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
@@ -341,6 +344,7 @@ public class EmployeeDesign extends JFrame {
 				modelRide.removeElementAt(index);
 				listRide.setModel(modelRide);
 				list1.setModel(modelRide);
+
 			}else if(actionEvent.getSource() == addBtn){
 				if(!(nametxt.getText().isEmpty() || pricetxt.getText().isEmpty() || capacitytxt.getText().isEmpty())){
 					controller.db_addRide(nametxt.getText(),Integer.parseInt(capacitytxt.getText()),Double.parseDouble(pricetxt.getText()));
