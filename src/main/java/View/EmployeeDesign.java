@@ -171,10 +171,14 @@ public class EmployeeDesign extends JFrame {
 		contentPane.add(agendapanel);
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
+		
+		
+		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(261, 89, 211, 191);
+		rideListScrollPane.setViewportView(list1);
+		list1.setLayoutOrientation(JList.VERTICAL);
 		agendapanel.add(rideListScrollPane);
-		
 
 		listUpdateRemove = new JList<String>();
 		JScrollPane updateAndRemoveScrollPane = new JScrollPane();
@@ -222,10 +226,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(dateChooser_1);
 		
 		
-		list1= new JList<String>(tableauRide);
-		list1.setBounds(262, 89, 207, 191);
-		agendapanel.add(list1);
-		list1.setLayoutOrientation(JList.VERTICAL);
+
 		
 		addAgendaBtn = new JButton("Add to agenda");
 		addAgendaBtn.setBounds(284, 350, 165, 29);
