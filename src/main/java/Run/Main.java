@@ -34,7 +34,7 @@ public class Main {
 
             //------------TEST---------------------------------
             
-            controller.getTotalPlaceUsedRide();
+            
             long millis=System.currentTimeMillis();
             java.sql.Date date = Date.valueOf("2020-11-25");
             ArrayList<Ride> listRide= msql.getRideList();
@@ -42,6 +42,19 @@ public class Main {
             HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
             Boolean boolEmployee = false;
 
+            ArrayList <Integer> test = new ArrayList <Integer> ();
+            for(int i=0;i<listRide.size();i++)
+            {
+            	
+            	test.add(controller.getTotalPlaceUsedRide(listRide.get(i).getName()));
+            	
+            }
+            System.out.println("yyyy : "+test.toString());
+            
+            
+            
+            
+            
             Employee mbr = new Employee("Thomas","Shelby",date,"Thomas.shelby@free.fr");
             mbr.setController(controller);
 

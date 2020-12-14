@@ -378,9 +378,9 @@ public String getPasswdFor(String user){
  }
  
  
- public int getTotalBookedPlace(){
+ public int getTotalBookedPlace(String nameRide){
 	 int total = 0;
-     String query = "SELECT SUM(placeNbrUsed) FROM time ";
+     String query = "SELECT SUM(placeNbrUsed) FROM Time WHERE name =" + "'"+nameRide+"'";
 
      try {
     	 
@@ -399,6 +399,7 @@ public String getPasswdFor(String user){
 
      return total;
 }
+
  
 
 

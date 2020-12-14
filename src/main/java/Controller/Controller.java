@@ -141,8 +141,8 @@ public class Controller {
         return (nbrOfTickets + ride.getPlaceNbrUsed()) <= ride.getRide().getNbrPlace();
     }
     
-    public int getTotalPlaceUsedRide() {
-    	return(mSql.getTotalBookedPlace());
+    public int getTotalPlaceUsedRide(String name) {
+    	return(mSql.getTotalBookedPlace(name));
     }
 
     //----------------------------------------------------------------------------------------

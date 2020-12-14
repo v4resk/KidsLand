@@ -151,7 +151,7 @@ public class EmployeeDesign extends JFrame {
 		
 		//---------------Member Panel---------------------------------------------
 		
-		/*memberpanel = new JPanel();
+		memberpanel = new JPanel();
 		memberpanel.setBounds(201, 2, 498, 396);
 		contentPane.add(memberpanel);
 		memberpanel.setVisible(false);
@@ -180,9 +180,9 @@ public class EmployeeDesign extends JFrame {
 		
 
 		statpanel.removeAll();
-		statpanel.add(createPieChart("yes"));
-		this.setLocationRelativeTo(null);*/
-	
+		statpanel.add(createPieChart("Rides Statistics",rideList));
+		this.setLocationRelativeTo(null);
+		
 		
 		//---------------Agenda Panel---------------------------------------------
 		
@@ -193,7 +193,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.setLayout(null);
 		
 		
-		list1= new JList<String>(/*tableauRide*/);
+		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(261, 89, 211, 191);
 		rideListScrollPane.setViewportView(list1);
@@ -265,7 +265,7 @@ public class EmployeeDesign extends JFrame {
 		
 		//---------------Ride Panel------------------------------------------------
 		
-		/*ridepanel = new JPanel();
+		ridepanel = new JPanel();
 		ridepanel.setBounds(201, 2, 498, 396);
 		contentPane.add(ridepanel);
 		ridepanel.setVisible(false);
@@ -318,7 +318,7 @@ public class EmployeeDesign extends JFrame {
 		scrollPane1.setBounds(291, 75, 183, 259);
 		scrollPane1.setViewportView(listRide);
 		listRide.setLayoutOrientation(JList.VERTICAL);
-		ridepanel.add(scrollPane1);*/
+		ridepanel.add(scrollPane1);
 
 		
 		
@@ -437,28 +437,31 @@ public class EmployeeDesign extends JFrame {
 		
 	}
 	
-	 private ChartPanel createPieChart(String chartTitle) {
-	        System.out.println("PieChart");
-	        PieDataset dataset = createDataset();
+	
+	//---------------------------------Methods to create a PieChart with JFreeChart-----------------------
+	
+	 private ChartPanel createPieChart(String chartTitle, ArrayList <Ride> list) { 
+	        PieDataset dataset = createDataset(list);
 	        JFreeChart chart = createChart(dataset, chartTitle);
 	        ChartPanel chartPanel = new ChartPanel(chart);
-	        chartPanel.setLocation(200, 100);
-	        chartPanel.setSize(250, 300);
+	        chartPanel.setLocation(4, 2);
+	        chartPanel.setSize(491, 392);
 	        return chartPanel;
 	    }
 
-	    private PieDataset createDataset() {
-	        System.out.println("PieDataset");
+	    private PieDataset createDataset(ArrayList <Ride> list) {
 	        DefaultPieDataset result = new DefaultPieDataset();
-	        result.setValue("Linux", 29);
-	        result.setValue("Mac", 20);
-	        result.setValue("Windows", 51);
+	        
+	        for(int i=0;i<list.size();i++)
+	        {
+	        	result.setValue(list.get(i).getName(), controller.getTotalPlaceUsedRide(list.get(i).getName()));
+	        }
+	        
 	        return result;
 
 	    }
 
 	    private JFreeChart createChart(PieDataset dataset, String title) {
-	        System.out.println("Create Chart");
 	        JFreeChart chart = ChartFactory.createPieChart3D(
 	            title, dataset, true, true, false);
 	        PiePlot3D plot = (PiePlot3D) chart.getPlot();
