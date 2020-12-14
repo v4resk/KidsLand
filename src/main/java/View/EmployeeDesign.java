@@ -207,7 +207,7 @@ public class EmployeeDesign extends JFrame {
 		statpanel.removeAll();
 		statpanel.add(createPieChart("Rides Statistics",rideList));
 		this.setLocationRelativeTo(null);
-		
+
 		//---------------Agenda Panel---------------------------------------------
 
 

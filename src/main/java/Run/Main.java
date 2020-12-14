@@ -31,50 +31,6 @@ public class Main {
             ModelSQL msql = new ModelSQL(conn);
             Controller controller = new Controller(msql);
             new Login(controller);
-
-            //------------TEST---------------------------------
-            
-            
-            long millis=System.currentTimeMillis();
-            java.sql.Date date = Date.valueOf("2020-11-25");
-            ArrayList<Ride> listRide= msql.getRideList();
-            ArrayList<Person> listPerson = msql.getPersonList();
-            HashMap<java.sql.Date,ArrayList<RideAgenda>>agenda = msql.getAgenda();
-            Boolean boolEmployee = false;
-
-            ArrayList <Integer> test = new ArrayList <Integer> ();
-            for(int i=0;i<listRide.size();i++)
-            {
-            	
-            	test.add(controller.getTotalPlaceUsedRide(listRide.get(i).getName()));
-            	
-            }
-            System.out.println("yyyy : "+test.toString());
-            
-            
-            
-            
-            
-            Employee mbr = new Employee("Thomas","Shelby",date,"Thomas.shelby@free.fr");
-            mbr.setController(controller);
-
-            controller.db_addAgenda("BoatTrip", Date.valueOf("2020-12-12"),12);
-
-            //SignIn
-            if(controller.signIn_check("Thomas.shelby@free.fr","dontfwpk")){
-                System.out.println("Loged in");
-                if(controller.isAnEmployee("Thomas.shelby@free.fr"))
-                    System.out.println("As employee");
-            }
-
-           if(mbr.bookARide(Date.valueOf("2020-12-12"),agenda.get(Date.valueOf("2020-12-12")).get(0),10,"Normal"))
-              System.out.println("booked");
-
-
-
-
-            System.out.println(agenda.toString());
-            //-------------END OF TEST----------------------------
         }
         catch(SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

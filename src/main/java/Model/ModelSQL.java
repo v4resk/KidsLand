@@ -380,18 +380,14 @@ public String getPasswdFor(String user){
  
  public int getTotalBookedPlace(String nameRide){
 	 int total = 0;
-<<<<<<< HEAD
      String query = "SELECT SUM(placeNbrUsed) FROM Time WHERE name =" + "'"+nameRide+"'";
-=======
-     String query = "SELECT SUM(placeNbrUsed) FROM Time ";
->>>>>>> 3d53c1f43ccb021dcc0766f081e5f0cecfcfc38d
 
      try {
     	 
          ResultSet res = stmt.executeQuery(query);
          if(res.next()) {
          total = res.getInt(1);
-         System.out.println(total);}
+         }
          
 
      }catch (SQLException e) {
