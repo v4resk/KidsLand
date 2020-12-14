@@ -30,6 +30,7 @@ import Controller.RideAgenda;
 import java.awt.Font;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
+import java.awt.BorderLayout;
 
 
 public class EmployeeDesign extends JFrame {
@@ -150,7 +151,7 @@ public class EmployeeDesign extends JFrame {
 		
 		//---------------Member Panel---------------------------------------------
 		
-		memberpanel = new JPanel();
+		/*memberpanel = new JPanel();
 		memberpanel.setBounds(201, 2, 498, 396);
 		contentPane.add(memberpanel);
 		memberpanel.setVisible(false);
@@ -180,7 +181,7 @@ public class EmployeeDesign extends JFrame {
 
 		statpanel.removeAll();
 		statpanel.add(createPieChart("yes"));
-		this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);*/
 	
 		
 		//---------------Agenda Panel---------------------------------------------
@@ -192,7 +193,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.setLayout(null);
 		
 		
-		list1= new JList<String>(tableauRide);
+		list1= new JList<String>(/*tableauRide*/);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(261, 89, 211, 191);
 		rideListScrollPane.setViewportView(list1);
@@ -212,7 +213,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(title1);
 		
 		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(6, 62, 224, 26);
+		dateChooser.setBounds(6, 62, 165, 26);
 		agendapanel.add(dateChooser);
 		
 		JLabel dateridetxt = new JLabel("Choose a date and a ride");
@@ -241,7 +242,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(lblNewLabel_3);
 		
 		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(262, 312, 211, 26);
+		dateChooser_1.setBounds(262, 312, 138, 26);
 		agendapanel.add(dateChooser_1);
 		
 
@@ -250,13 +251,21 @@ public class EmployeeDesign extends JFrame {
 		addAgendaBtn.setBounds(284, 350, 165, 29);
 		agendapanel.add(addAgendaBtn);
 		
+		JButton btnNewButton = new JButton("Set");
+		btnNewButton.setBounds(171, 62, 59, 29);
+		agendapanel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Set");
+		btnNewButton_1.setBounds(397, 313, 75, 26);
+		agendapanel.add(btnNewButton_1);
+		
 
 		
 		
 		
 		//---------------Ride Panel------------------------------------------------
 		
-		ridepanel = new JPanel();
+		/*ridepanel = new JPanel();
 		ridepanel.setBounds(201, 2, 498, 396);
 		contentPane.add(ridepanel);
 		ridepanel.setVisible(false);
@@ -309,7 +318,7 @@ public class EmployeeDesign extends JFrame {
 		scrollPane1.setBounds(291, 75, 183, 259);
 		scrollPane1.setViewportView(listRide);
 		listRide.setLayoutOrientation(JList.VERTICAL);
-		ridepanel.add(scrollPane1);
+		ridepanel.add(scrollPane1);*/
 
 		
 		
@@ -460,5 +469,4 @@ public class EmployeeDesign extends JFrame {
 	        return chart;
 
 	    }
-
 }
