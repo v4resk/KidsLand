@@ -380,6 +380,7 @@ public String getPasswdFor(String user){
  
  public int getTotalBookedPlace(String nameRide){
 	 int total = 0;
+
      String query = "SELECT SUM(placeNbrUsed) FROM Time WHERE name =" + "'"+nameRide+"'";
 
      try {

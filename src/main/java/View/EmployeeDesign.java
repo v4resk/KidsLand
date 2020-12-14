@@ -87,7 +87,6 @@ public class EmployeeDesign extends JFrame {
 	private JDateChooser dateChooser_1;
 	private HashMap<Date, ArrayList<RideAgenda>> agenda;
 	private JButton setButtonDeletUpdate;
-	private JButton setButtonAddAgenda;
 	private ArrayList<RideAgenda> ridelistForList;
 	private JButton updateAgendPriceBtn;
 	private JButton removeAgendaBtn;
@@ -189,7 +188,7 @@ public class EmployeeDesign extends JFrame {
 		list.setLayoutOrientation(JList.VERTICAL);
 		memberpanel.add(scrollPane);
 		
-		removeuser = new JButton("Remove this user");
+		removeuser = new JButton("Remove user");
 		removeuser.setBounds(310, 186, 150, 29);
 		memberpanel.add(removeuser);
 		removeuser.addActionListener(new EmployeeUserManaList());
@@ -223,7 +222,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(dateChooser);
 
 		dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(262, 312, 138, 26);
+		dateChooser_1.setBounds(262, 312, 211, 26);
 		agendapanel.add(dateChooser_1);
 
 
@@ -237,7 +236,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(rideListScrollPane);
 
 
-		//----------------------FOR choos a date to update/remove-----------------------------
+		//----------------------To choose a date to update/remove-----------------------------
 		// Select date;
 		TimeEvaluator evaluator = new TimeEvaluator();
 		for (Date i : agenda.keySet()){
@@ -271,7 +270,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(title1);
 		
 		JLabel dateridetxt = new JLabel("Choose a date and a ride");
-		dateridetxt.setBounds(7, 42, 165, 16);
+		dateridetxt.setBounds(7, 42, 224, 16);
 		agendapanel.add(dateridetxt);
 		
 		removeAgendaBtn = new JButton("Delete");
@@ -299,17 +298,13 @@ public class EmployeeDesign extends JFrame {
 
 		addAgendaBtn = new JButton("Add to agenda");
 		addAgendaBtn.setBounds(284, 350, 165, 29);
+		addAgendaBtn.addActionListener(new EmployeeAgendaManaList());
 		agendapanel.add(addAgendaBtn);
 		
 		setButtonDeletUpdate = new JButton("Set");
 		setButtonDeletUpdate.setBounds(171, 62, 59, 29);
 		agendapanel.add(setButtonDeletUpdate);
 		setButtonDeletUpdate.addActionListener(new EmployeeAgendaManaList());
-		
-		setButtonAddAgenda = new JButton("Set");
-		setButtonAddAgenda.setBounds(397, 313, 75, 26);
-		agendapanel.add(setButtonAddAgenda);
-		setButtonAddAgenda.addActionListener(new EmployeeAgendaManaList());
 
 
 
@@ -358,7 +353,7 @@ public class EmployeeDesign extends JFrame {
 		lblNewLabelRide.setBounds(50, 90, 150, 20);
 		ridepanel.add(lblNewLabelRide);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("Capacity of the new ride");
+		JLabel lblNewLabel_3_1 = new JLabel("Capacity");
 		lblNewLabel_3_1.setBounds(50, 177, 170, 20);
 		ridepanel.add(lblNewLabel_3_1);
 		
@@ -385,7 +380,7 @@ public class EmployeeDesign extends JFrame {
 		
 		lblNewLabel_1 = new JLabel("Loged in as employee");
 		lblNewLabel_1.setFont(new Font("Skia", Font.BOLD, 19));
-		lblNewLabel_1.setBounds(214, 78, 234, 105);
+		lblNewLabel_1.setBounds(214, 78, 324, 105);
 		contentPane.add(lblNewLabel_1);
 
 		setUndecorated(true);
@@ -397,7 +392,7 @@ public class EmployeeDesign extends JFrame {
 
 
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()==setButtonAddAgenda){
+			if(e.getSource()==addAgendaBtn){
 				java.util.Date date = dateChooser_1.getDate();
 				String pattern = "yyyy-MM-dd";
 				DateFormat dFormat = new SimpleDateFormat(pattern);
