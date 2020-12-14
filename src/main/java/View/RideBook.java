@@ -267,7 +267,7 @@ public class RideBook extends JFrame {
 					priceTotal += rideAgenda.getPrice() * tChild * 0.7;
 					priceTotal += rideAgenda.getPrice() * tSenior * 0.9;
 					priceTotal += rideAgenda.getPrice() * tYoung * 0.85;
-					totalpricetxt.setText(priceTotal +" €");
+					totalpricetxt.setText(df.format(priceTotal) +" €");
 
 					if(id==2){
 						priceTotalGuest = rideAgenda.getPrice()*Double.parseDouble(totalnumbertxt.getText());

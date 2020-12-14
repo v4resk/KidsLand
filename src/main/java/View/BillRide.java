@@ -1,19 +1,13 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
-
-import Controller.Guest;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
