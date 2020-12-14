@@ -207,7 +207,6 @@ public class EmployeeDesign extends JFrame {
 		statpanel.removeAll();
 		statpanel.add(createPieChart("Rides Statistics",rideList));
 		this.setLocationRelativeTo(null);
-
 		
 		//---------------Agenda Panel---------------------------------------------
 
@@ -396,7 +395,7 @@ public class EmployeeDesign extends JFrame {
 	}
 	private class EmployeeAgendaManaList implements ActionListener{
 
-		@Override
+
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==setButtonAddAgenda){
 				java.util.Date date = dateChooser_1.getDate();
