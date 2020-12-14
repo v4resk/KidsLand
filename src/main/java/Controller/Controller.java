@@ -7,8 +7,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 public class Controller {
 
     final private ModelSQL mSql;

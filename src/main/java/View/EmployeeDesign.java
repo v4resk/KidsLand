@@ -15,33 +15,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import javax.naming.ldap.StartTlsResponse;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.DocumentEvent;
-
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
-
 import Controller.Controller;
 import Controller.Person;
 import Controller.Ride;
 import Controller.RideAgenda;
-
 import java.awt.Font;
-import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
-import java.awt.BorderLayout;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.HashMap;
 
 
@@ -403,8 +392,10 @@ public class EmployeeDesign extends JFrame {
 					if(controller.getRideList().get(i).getName().equals(list1.getSelectedValue()))
 						prixDefault = controller.getRideList().get(i).getPrice();
 				}
-				controller.db_addAgenda(list1.getSelectedValue(),sqlDate2,prixDefault);
+				if(controller.db_addAgenda(list1.getSelectedValue(),sqlDate2,prixDefault))
 				JOptionPane.showMessageDialog(null,"Succes !");
+				else
+				JOptionPane.showMessageDialog(null,"Ride already exist at this date !");
 			}
 			if(e.getSource()==setButtonDeletUpdate){
 				java.util.Date date = dateChooser.getDate();

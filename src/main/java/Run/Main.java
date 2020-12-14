@@ -1,29 +1,18 @@
 package Run;
 
-//** TO-DO LIST : Gui implements back-end
-//                  Add employee fonctions;
-
-
-
 import Controller.*;
-import Controller.Ride;
 import Model.ModelSQL;
-import Controller.Person;
-import Controller.RideAgenda;
 import View.Login;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
 
         final String url = "jdbc:mysql://localhost:3306/kidsLand";
-        final String passwd = "Alex08";
-        final String user = "alex";
+        final String passwd = "root";
+        final String user = "v4resk";
 
 
         try {

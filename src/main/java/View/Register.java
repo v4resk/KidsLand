@@ -1,8 +1,6 @@
 package View;
 
 import Controller.*;
-import com.toedter.calendar.JDateChooser;
-
 
 import java.awt.Color;
 import java.awt.Image;
@@ -12,37 +10,24 @@ import java.sql.Date;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class Register extends JFrame {
 
-	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField1;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JPasswordField textField_3;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton;
-	private Controller controller;
-	/**
-	 * Launch the application.
-	 */
-
-
-	/**
-	 * Create the frame.
-	 */
-
-
+	private final JTextField textField;
+	private final JTextField textField1;
+	private final JTextField textField_1;
+	private final JTextField textField_2;
+	private final JPasswordField textField_3;
+	private final JButton btnNewButton_2;
+	private final JButton btnNewButton;
+	private final Controller controller;
 
 	public Register(Controller controller) {
 		this.controller = controller;
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(130, 130, 700, 400);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(224, 255, 255));
 		contentPane.setBorder(new LineBorder(UIManager.getColor("textHighlight"), 2));
 		setContentPane(contentPane);
@@ -54,7 +39,7 @@ public class Register extends JFrame {
 		textField.setColumns(10);
 		contentPane.add(textField);
 		
-		JLabel lblNewLabel1 = new JLabel("First Name");
+
 		
 		textField1 = new JTextField();
 		textField1.setBorder(null);
@@ -153,8 +138,11 @@ private class RegisterListener implements ActionListener{
 				|| textField_2 .getText().isEmpty() || String.valueOf(textField_3.getPassword()).isEmpty())){
 
 
-					controller.db_addMember(textField_1.getText(),textField.getText(), Date.valueOf(textField1.getText()),textField_2.getText(),String.valueOf(textField_3.getPassword()));
+					if(controller.db_addMember(textField_1.getText(),textField.getText(), Date.valueOf(textField1.getText()),textField_2.getText(),String.valueOf(textField_3.getPassword())))
 					JOptionPane.showMessageDialog(null,"sign up successfully");
+					else
+						JOptionPane.showMessageDialog(null,"Something went wrong");
+
 					Person member = controller.getPerson(textField_2.getText());
 					new Calendar(member,1);
 				}else{
