@@ -56,6 +56,7 @@ public class EmployeeDesign extends JFrame {
 	private JDialog testGraph;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JList<String> listUpdateRemove;
 
 
 
@@ -90,11 +91,7 @@ public class EmployeeDesign extends JFrame {
 			tableauRide[i] = rideList.get(i).getName();
 			modelRide.addElement(tableauRide[i]);
 		}
-		
-		
 
-		
-		
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(102, 153, 255));
@@ -171,7 +168,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.setVisible(false);
 		agendapanel.setLayout(null);
 		
-		
+		// List of rides who can be book
 		list1= new JList<String>(tableauRide);
 		JScrollPane rideListScrollPane = new JScrollPane();
 		rideListScrollPane.setBounds(262, 54, 211, 103);
@@ -180,7 +177,7 @@ public class EmployeeDesign extends JFrame {
 		agendapanel.add(rideListScrollPane);
 		
 
-		JList<String> listUpdateRemove = new JList<String>();
+		listUpdateRemove = new JList<String>();
 		JScrollPane updateAndRemoveScrollPane = new JScrollPane();
 		updateAndRemoveScrollPane.setBounds(6, 92, 224, 191);
 		updateAndRemoveScrollPane.setViewportView(listUpdateRemove);
